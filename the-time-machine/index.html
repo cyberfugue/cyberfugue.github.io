@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Time Machine App</title>
+<meta name="description" content="H. G. Wells's The Time Machine (1895), as a journey you make yourself: sit in the saddle, press the lever over, and travel. With the whole book, read aloud. For iPhone and iPad.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/the-time-machine/">
+<meta property="og:title" content="The Time Machine, for iPhone and iPad">
+<meta property="og:description" content="Sit in the saddle. Press the lever over. H. G. Wells's 1895 novel, read aloud, as a journey through time.">
+<meta property="og:image" content="https://cyberfugue.github.io/the-time-machine/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/the-time-machine/img/share.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap">
+<style>
+  /* the same brass and lamplight as the edition: deliberately one theme */
+  :root {
+    --night: #0d0a07;
+    --ink: #efe4cc;
+    --ink-faint: #9c8e72;
+    --gold: #d6aa55;
+    --gold-l: #f0d58e;
+    --bright: #fff3da;
+    --line: rgba(214, 170, 85, 0.2);
+    --display: "IM Fell English", Georgia, "Times New Roman", serif;
+    --display-sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+    --body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); }
+  body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gold-l); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* the White Sphinx through the rhododendrons */
+  .hero { position: relative; min-height: min(100svh, 62rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: 0 var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; z-index: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(13,10,7,.1) 0%, rgba(13,10,7,0) 28%, rgba(13,10,7,.6) 60%, var(--night) 100%); }
+  .hero > *:not(img) { position: relative; z-index: 2; }
+  .hero .kicker, .hero .lede, .hero .note { text-shadow: 0 0 12px var(--night), 0 0 4px var(--night), 0 1px 2px #000; }
+  .kicker { font-family: var(--display-sc); letter-spacing: .32em; font-size: .8rem; color: var(--gold); text-transform: lowercase; margin: 0; }
+  .hero h1 { font-family: var(--display); font-weight: 400; margin: .4rem 0 0; font-size: clamp(3rem, 11vw, 6.5rem); line-height: .92; color: var(--bright); text-shadow: 0 0 40px rgba(214,170,85,.45), 0 0 2px rgba(0,0,0,.9); }
+  .hero h1 span { display: block; font-size: .38em; font-style: italic; color: var(--ink-faint); margin-top: .35em; letter-spacing: .06em; }
+  .lede { max-width: 34rem; margin: 1.4rem auto 0; font-size: 1.2rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: rgba(13,10,7,.55); padding: .85em 1.5em; font-family: var(--display-sc); letter-spacing: .14em; font-size: .95rem; text-transform: lowercase; color: var(--ink); text-decoration: none; backdrop-filter: blur(4px); }
+  .btn.primary { border-color: rgba(214,170,85,.7); color: var(--bright); }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { border-color: var(--gold-l); color: #fff; }
+  .note { margin: .9rem 0 0; color: var(--ink-faint); font-size: .95rem; font-style: italic; }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; margin: 0 0 1rem; color: var(--bright); }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.6rem auto 0; max-width: 32rem; font-style: italic; color: var(--ink-faint); }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--display); color: var(--gold); font-size: 1.1rem; letter-spacing: .1em; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.1; margin: .2rem 0 .8rem; color: var(--bright); }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .55rem; background: linear-gradient(145deg, #2e2619, #0f0c08); box-shadow: 0 0 0 1px rgba(214,170,85,.18), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(214,170,85,.1); }
+  .phone img { border-radius: 1.7rem; width: 100%; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* what is free, and the two purchases */
+  .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 64rem; margin: 1.5rem auto 0; }
+  .card { border: 1px solid var(--line); padding: 1.4rem 1.4rem 1.2rem; background: rgba(214,170,85,.03); }
+  .card.buy { border-color: rgba(214,170,85,.55); background: radial-gradient(ellipse at 50% 0%, rgba(214,170,85,.12), transparent 70%); }
+  .card h3 { font-family: var(--display-sc); font-weight: 400; letter-spacing: .18em; text-transform: lowercase; font-size: 1rem; margin: 0 0 .6rem; color: var(--gold); }
+  .card ul { margin: 0; padding-left: 1.1rem; }
+  .card li { margin: .2rem 0; }
+  @media (min-width: 860px) { .offer { grid-template-columns: 1fr 1fr 1fr; } }
+  .center { text-align: center; }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--ink-faint); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="The White Sphinx on its bronze pedestal, seen through flowering rhododendrons, with the time machine standing on the lawn before it" width="1920" height="823">
+  <p class="kicker">H. G. Wells · 1895</p>
+  <h1>The Time Machine<span>for iPhone and iPad</span></h1>
+  <p class="lede">Sit in the saddle of the machine, brass, nickel, ivory and twisted quartz, and press the starting lever over. Wells's novel, as a journey you make yourself, with the whole book read aloud.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">The first three chapters are free in the app.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <h2>A voyage to make yourself</h2>
+    <p>From a Richmond laboratory to the world of the Eloi in the year 802,701, down into the Morlocks' Underworld, and on to the last beach under a dying sun. Every place is drawn live around you, every sound is made live, and everything set in the old face is Wells's, word for word.</p>
+    <blockquote>“I was in my laboratory at four o'clock, and since then … I've lived eight days … such days as no human being ever lived before!”</blockquote>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>Press the lever over, and go</h3>
+        <p>The laboratory goes “faint and hazy, then fainter and ever fainter”. Drag the starting lever and the dials run; the stopping lever brakes, and past rest takes you back. Bring the machine down on a date, or come in too hot and be flung headlong.</p>
+      </div>
+      <div class="phone"><img src="img/lever.jpg" alt="The laboratory at Richmond seen from the saddle, with the date dials and the two levers below" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>Hours a second to ten million years</h3>
+        <p>Night follows day “like the flapping of a black wing”, the sun becomes “a brilliant arch”, and huge buildings rise up faint and fair. In <em>Take the machine</em> there is no story, just the machine and the world at every year: set a dial-stop for the Golden Age, the beach of the crabs or the end of the world, or simply go.</p>
+      </div>
+      <div class="phone"><img src="img/speed.jpg" alt="Travelling through the ages of great building, the sky a blur over the green hillside" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">III</div>
+        <h3>Take the pen</h3>
+        <p>The whole story in five acts, in Wells's own words throughout: the model on the octagonal table, the White Sphinx in the hail, the little people of the Golden Age, and the machine gone at moonrise.</p>
+      </div>
+      <div class="phone"><img src="img/pen.jpg" alt="The White Sphinx looming over the bushes, with Wells's description of it from Chapter IV" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">IV</div>
+        <h3>Weena</h3>
+        <p>Down the well into the Underworld, the Palace of Green Porcelain with its matches and camphor and iron bar, and Weena at your side, until the night the forest burns.</p>
+      </div>
+      <div class="phone"><img src="img/weena.jpg" alt="Weena, in a white dress, standing in the long grass before the Palace of Green Porcelain" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>Fire against the dark</h3>
+        <p>The forest on fire, the trap of the White Sphinx, the last beach and the eclipse, and home with two white flowers in your pocket, if you have earned them.</p>
+      </div>
+      <div class="phone"><img src="img/forest.jpg" alt="The burning forest at night, with the passage from Chapter XII" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">VI</div>
+        <h3>The whole book, read aloud</h3>
+        <p>The complete 1895 text, with the world behind the page at the place and the hour of each passage. Listen to Cliff Stone's LibriVox reading, word-timed so the page follows the voice. It is inside the app and plays without a connection.</p>
+      </div>
+      <div class="phone"><img src="img/book.jpg" alt="The opening of the book over the Time Traveller's drawing-room" width="780" height="1710" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>Begin free</h2>
+    <p>No subscription, no ads, no account.</p>
+  </div>
+  <div class="offer">
+    <div class="card">
+      <h3>Free</h3>
+      <ul>
+        <li>Chapters I to III, read and heard</li>
+        <li>The journey from the drawing-room at Richmond to the machine in the laboratory</li>
+      </ul>
+    </div>
+    <div class="card buy">
+      <h3>The whole book</h3>
+      <ul>
+        <li>The rest of the book, read and read aloud</li>
+        <li>Restore it free on your other devices</li>
+      </ul>
+    </div>
+    <div class="card buy">
+      <h3>The whole journey</h3>
+      <ul>
+        <li>The voyage itself, with the levers in your hands, all the way to the last beach and home</li>
+        <li><em>Take the machine</em>, the open voyage to any year</li>
+        <li>Every moment of the journey to return to</li>
+        <li>Restore it free on your other devices</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p>The text is the 1895 Heinemann edition of <em>The Time Machine</em>, in the public domain. The narration is the LibriVox recording read by Cliff Stone, also in the public domain. The realistic people are from Microsoft's Rocketbox library. Everything else seen and heard was made for this edition: four ages of the world, about an hour and a half.</p>
+    <p>The app collects no data. It works on iPhone and iPad with iOS 15 or later; headphones are best.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>The Time Machine · an immersive edition of H. G. Wells's 1895 novel</p>
+</footer>
+
+</body>
+</html>

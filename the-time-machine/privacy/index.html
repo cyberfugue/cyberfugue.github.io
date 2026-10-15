@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Time Machine Privacy</title>
+<meta name="description" content="The privacy policy of The Time Machine, the immersive edition of H. G. Wells's 1895 novel for iPhone and iPad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English&family=IM+Fell+English+SC&display=swap">
+<style>
+  /* the same brass and lamplight as the edition: deliberately one theme */
+  :root {
+    --night: #0d0a07;
+    --ink: #efe4cc;
+    --ink-faint: #9c8e72;
+    --gold: #d6aa55;
+    --gold-l: #f0d58e;
+    --line: rgba(214, 170, 85, 0.2);
+    --display: "IM Fell English", Georgia, "Times New Roman", serif;
+    --display-sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+    --body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); }
+  body {
+    margin: 0; min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 0%, rgba(214,170,85,.12), transparent 60%), var(--night);
+    color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 38rem; margin: 0 auto;
+    padding: calc(56px + env(safe-area-inset-top, 0px)) calc(16px + env(safe-area-inset-right, 0px)) calc(64px + env(safe-area-inset-bottom, 0px)) calc(16px + env(safe-area-inset-left, 0px));
+  }
+  .kicker { font-family: var(--display-sc); letter-spacing: .3em; font-size: .8rem; color: var(--gold); text-transform: lowercase; margin: 0; }
+  h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.4rem); line-height: 1; margin: .3rem 0 1.4rem; color: #fff3da; text-shadow: 0 0 30px rgba(214,170,85,.3); }
+  h2 { font-family: var(--display); font-weight: 400; font-size: 1.45rem; margin: 2.2rem 0 .4rem; color: #fff3da; }
+  p { margin: 0 0 .9rem; }
+  a { color: var(--gold-l); text-underline-offset: 3px; }
+  .contact { border: 1px solid rgba(214,170,85,.5); padding: 1rem 1.2rem; margin: 0 0 1rem; background: rgba(13,10,7,.5); }
+  .contact p { margin: 0; }
+  .contact a { font-size: 1.2rem; overflow-wrap: anywhere; }
+  .hint { color: var(--ink-faint); font-size: 1rem; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-faint); font-size: .95rem; }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">The Time Machine · iPhone and iPad</p>
+  <h1>Privacy policy</h1>
+  <p class="hint">Effective 15 October 2026</p>
+
+  <div class="contact">
+    <p>In short: the app collects no personal data. It has no accounts, no analytics, no advertising and no tracking, and nothing you do in it is sent to us.</p>
+  </div>
+
+  <h2>What stays on your device</h2>
+  <p>To let you carry on where you left off, the app saves a few things on your iPhone or iPad: your place in the journey and in the book, the moments of the journey you have reached (with what was in your pockets and your notebook), your settings (sound levels, text size, captions, the people), and whether you have unlocked the whole journey. This stays on your device. It isn't sent anywhere and we can't see it. Deleting the app deletes it.</p>
+
+  <h2>Purchases</h2>
+  <p>The one in-app purchase is made and processed by Apple through the App Store. Apple handles your payment and account details under <a href="https://www.apple.com/legal/privacy/">its own privacy policy</a>. The app only asks the App Store whether this device's Apple Account owns the purchase, so it can open the rest of the journey. We never receive your name, email, payment details or Apple Account.</p>
+
+  <h2>Network</h2>
+  <p>The book, its narration, the people and the fonts are all inside the app, so it plays without a connection. Apart from the App Store purchase checks above, the app makes no network requests. The one link out, to librivox.org in <em>About this edition</em>, opens in Safari only if you tap it.</p>
+
+  <h2>Children</h2>
+  <p>The app collects no data from anyone, including children.</p>
+
+  <h2>The website</h2>
+  <p>This page, the support page and the app’s page (cyberfugue.github.io) are hosted by GitHub Pages. They load fonts from Google Fonts, so Google, and GitHub, receive the technical details any web request carries, such as your IP address. The pages themselves set no cookies and run no analytics.</p>
+
+  <h2>Changes</h2>
+  <p>If this policy changes, the new version will be posted on this page with a new effective date.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about privacy: <a href="mailto:cyberfugue@gmail.com?subject=The%20Time%20Machine%20privacy">cyberfugue@gmail.com</a>. Help with the app is on the <a href="../support/">support page</a>.</p>
+</main>
+</body>
+</html>

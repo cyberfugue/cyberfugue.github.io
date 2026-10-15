@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Pilgrim's Progress App</title>
+<meta name="description" content="John Bunyan's The Pilgrim's Progress, both parts, read aloud and walked through a living toy theatre of the Way. Free for iPhone and iPad.">
+<meta name="theme-color" content="#16110c">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/pilgrims-progress/">
+<meta property="og:title" content="The Pilgrim's Progress, for iPhone and iPad">
+<meta property="og:description" content="Bunyan's whole book, read aloud, in a living toy theatre of the Way. Free.">
+<meta property="og:image" content="https://cyberfugue.github.io/pilgrims-progress/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/pilgrims-progress/img/share.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap">
+<style>
+  /* the theatre at dusk, and the paper of its pages: deliberately one theme */
+  :root {
+    --night: #16110c;
+    --night-2: #211910;
+    --paper: #efe5cf;
+    --paper-edge: #cdb98f;
+    --ink: #2a2017;
+    --ink-soft: #5d4b39;
+    --chrome-ink: #eee2c6;
+    --chrome-dim: #b8a789;
+    --gold: #a87a22;
+    --gold-l: #e6c57d;
+    --rubric: #9a2f1f;
+    --line: rgba(230, 197, 125, 0.18);
+    --display: "IM Fell English", Georgia, "Times New Roman", serif;
+    --display-sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+    --body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); }
+  body { margin: 0; background: var(--night); color: var(--chrome-ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gold-l); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* the road and the City at dawn */
+  .hero { position: relative; min-height: min(100svh, 62rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: 0 var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 52% 30%; z-index: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(22,17,12,.1) 0%, rgba(22,17,12,0) 30%, rgba(22,17,12,.6) 60%, var(--night) 100%); }
+  .hero > *:not(img) { position: relative; z-index: 2; }
+  .hero .kicker, .hero .lede, .hero .note { text-shadow: 0 0 12px var(--night), 0 0 4px var(--night), 0 1px 2px #000; }
+  .kicker { font-family: var(--display-sc); letter-spacing: .3em; font-size: .82rem; color: var(--gold-l); text-transform: lowercase; margin: 0; }
+  .hero h1 { font-family: var(--display); font-weight: 400; margin: .4rem 0 0; font-size: clamp(3rem, 11vw, 6.4rem); line-height: .95; color: #f6e7c4; text-shadow: 0 0 40px rgba(230,197,125,.35), 0 0 2px rgba(0,0,0,.9); }
+  .hero h1 span { display: block; font-size: .36em; font-style: italic; color: var(--chrome-dim); margin-top: .4em; letter-spacing: .04em; }
+  .lede { max-width: 35rem; margin: 1.4rem auto 0; font-size: 1.2rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: rgba(22,17,12,.55); padding: .85em 1.5em; font-family: var(--display-sc); letter-spacing: .12em; font-size: .98rem; text-transform: lowercase; color: var(--chrome-ink); text-decoration: none; backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+  .btn.primary { background: linear-gradient(#b8903f, #8a6524); border-color: var(--gold-l); color: #fff8e6; text-shadow: 0 1px 0 rgba(0,0,0,.3); }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { border-color: var(--gold-l); color: #fff; }
+  /* on a phone, the art as a band above the words, so the pilgrim and the City both show */
+  @media (max-width: 700px) {
+    .hero { min-height: 0; padding-top: 0; }
+    .hero img { position: relative; inset: auto; width: calc(100% + 2 * var(--gutter)); max-width: none; height: min(56svh, 30rem); margin: 0 calc(-1 * var(--gutter)) -3.5rem; object-position: 54% 50%; }
+    .hero::after { bottom: auto; height: min(56svh, 30rem); background: linear-gradient(rgba(22,17,12,0) 55%, var(--night) 100%); }
+  }
+  .note { margin: .9rem 0 0; color: var(--chrome-dim); font-size: .98rem; font-style: italic; }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; margin: 0 0 1rem; color: #f6e7c4; }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  .orn { color: var(--gold-l); text-align: center; font-size: 1.4rem; margin: 0 0 1rem; }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--display); color: var(--gold-l); font-size: 1.1rem; letter-spacing: .1em; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.1; margin: .2rem 0 .8rem; color: #f6e7c4; }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .55rem; background: linear-gradient(145deg, #3a2f24, #110d09); box-shadow: 0 0 0 1px rgba(230,197,125,.16), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(230,197,125,.1); }
+  .phone img { border-radius: 1.7rem; width: 100%; aspect-ratio: 390 / 844; object-fit: cover; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* free, all of it: on the edition's paper */
+  .free { max-width: 46rem; margin: 0 auto; background: var(--paper); color: var(--ink); border: 1px solid var(--paper-edge); padding: clamp(1.5rem, 5vw, 2.6rem); box-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 0 40px rgba(168,122,34,.12); }
+  .free h2 { color: var(--ink); text-align: center; }
+  .free .sub { text-align: center; color: var(--ink-soft); font-style: italic; margin: -.4rem 0 1.2rem; }
+  .free ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .55rem; }
+  .free li { padding-left: 1.6rem; position: relative; }
+  .free li::before { content: "\2767"; position: absolute; left: 0; color: var(--rubric); }
+  @media (min-width: 700px) { .free ul { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  .center { text-align: center; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--chrome-dim); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="A pilgrim with a great burden on his back walks a road over cut-paper hills toward a golden city shining on a far hill at dawn" width="1920" height="823">
+  <p class="kicker">John Bunyan · 1678 &amp; 1684</p>
+  <h1>The Pilgrim’s Progress<span>for iPhone and iPad</span></h1>
+  <p class="lede">A man with a burden on his back sets out from the City of Destruction for the Celestial City. Read the whole of Bunyan’s dream, hear it read aloud, and walk the Way through a living toy theatre that follows every page.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+    <a class="btn" href="https://pilgrims-progress-immersive.vercel.app/">Read it online</a>
+  </div>
+  <p class="note">Free, all of it. No purchases, no ads, no account.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <p class="orn" aria-hidden="true">&#10086;</p>
+    <h2>The road, as you read it</h2>
+    <p>For three hundred years <em>The Pilgrim’s Progress</em> has been read as a journey: the Slough of Despond, the Wicket Gate, the Cross, Vanity Fair, Doubting Castle, the River. This edition lays that whole road out as one long theatre of cut paper, and ties every passage of both parts to its place on it.</p>
+    <p>As you read, the pilgrims walk on. When they stop to talk, they stand. When the text brings someone on, they come up onto the stage.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>The burden falls at the Cross</h3>
+        <p>Christian carries his burden until the text reaches the Cross. Then it loosens, tumbles down the slope and falls into the sepulchre. His rags become a coat, he is given his roll, he is armed at the Palace Beautiful.</p>
+        <p>Frederick Barnard’s engravings of 1890 sit beside the passages they show, and open full size.</p>
+      </div>
+      <div class="phone"><img src="img/cross.jpg" alt="A pilgrim standing at a cross on a hill in the theatre, over the page where his burden falls, with Barnard's engraving of Christian at the Cross below" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>Both parts, read aloud</h3>
+        <p>Two complete LibriVox readings, by Joy Chan and by MaryAnn Spiegel, about 23 hours in all, built into the app. The text follows the voice paragraph by paragraph, and the pilgrims walk with it. It plays without a connection, keeps playing with your screen locked, and has a sleep timer.</p>
+      </div>
+      <div class="phone"><img src="img/listen.jpg" alt="The pilgrims at the golden gate of the Celestial City, with the narration playing below, read by Joy Chan" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">III</div>
+        <h3>The Valley of the Shadow of Death</h3>
+        <p>Each place has its own light and weather, sound and music: rain on the Slough, the festive dusk of the Fair, the storm over By-path Meadow, the gold of the City. In the Valley of the Shadow the stage goes dark but for a lantern about the pilgrim, and the page goes dark too, until the day breaks.</p>
+      </div>
+      <div class="phone"><img src="img/shadow.jpg" alt="The stage almost black but for a small light about Christian, over a darkened page" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">IV</div>
+        <h3>Walk the Way</h3>
+        <p>Step out of the book and walk the road yourself. The cast, the light and the sound are what the story has at each place. Glowing sights open notes and Bunyan’s own words, and you can read on from wherever you stand.</p>
+      </div>
+      <div class="phone"><img src="img/walk.jpg" alt="Christian and Faithful walking into Vanity Fair at dusk, its booths and lit windows behind them" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>The map of the Way</h3>
+        <p>A parchment chart of the road, for Christian and for Christiana, with every station drawn in the theatre’s own scenery. The way you have read is gilded; the rest lies under mist.</p>
+      </div>
+      <div class="phone"><img src="img/map.jpg" alt="A parchment map of the winding road from the City of Destruction to the Celestial City" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">VI</div>
+        <h3>Choose the Way</h3>
+        <p>At Bunyan’s turnings, from Worldly Wiseman’s advice to the River, you choose. Each wrong turn ends as Bunyan says such turns end, in his own words: 39 passages and 15 endings.</p>
+      </div>
+      <div class="phone"><img src="img/choose.jpg" alt="Choose the Way: Obstinate and Pliable come running after you, with a quotation from Bunyan and choices below" width="780" height="1688" loading="lazy"></div>
+    </article>
+
+    <article class="feature" lang="pt-BR">
+      <div>
+        <div class="num">VII</div>
+        <h3>Em português</h3>
+        <p lang="en">The whole edition in Brazilian Portuguese. The First Part in four public-domain translations, aligned with Bunyan paragraph by paragraph so you can change from one to another at the same place. The Second Part in a new translation made for this edition. Both read aloud by a woman’s or a man’s voice.</p>
+      </div>
+      <div class="phone"><img src="img/portugues.jpg" alt="The Wicket Gate in Portuguese, Kalley's translation, with the Portuguese narration playing" width="780" height="1688" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="free">
+    <h2>Free, all of it</h2>
+    <p class="sub">No purchases, no subscription, no ads, no account.</p>
+    <ul>
+      <li>Both parts, complete, with all of Bunyan’s verses</li>
+      <li>102 engravings after Frederick Barnard</li>
+      <li>Two LibriVox readings and two Portuguese voices, inside the app</li>
+      <li>Sound and music made live for every place</li>
+      <li>Walk the Way, the map and the Scrip</li>
+      <li>Choose the Way, with all fifteen endings</li>
+      <li>Notes on old words, scripture and people</li>
+      <li>Read by lantern, at any size of text</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p>The text is the 1853 Derby &amp; Miller edition of both parts, in the public domain, as are Barnard’s engravings and the LibriVox recordings. The theatre, its players and scenery, the sound and music, the map and Choose the Way were made for this edition, as was the Portuguese translation of the Second Part.</p>
+    <p>The app collects no data and needs no connection. It works on iPhone and iPad with iOS 15 or later, and on iPhone Duo it resizes as you fold and unfold, keeping your place.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="https://pilgrims-progress-immersive.vercel.app/">Read online</a>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>The Pilgrim’s Progress · an immersive edition of John Bunyan’s book</p>
+</footer>
+
+</body>
+</html>
