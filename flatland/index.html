@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flatland App</title>
+<meta name="description" content="Edwin A. Abbott's Flatland (1884), read aloud, with its four worlds to walk into: Lineland, Flatland, Spaceland and the fourth dimension. For iPhone and iPad.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/flatland/">
+<meta property="og:title" content="Flatland, for iPhone and iPad">
+<meta property="og:description" content="A book you can walk into: Abbott's 1884 classic, read aloud, from Lineland to the fourth dimension.">
+<meta property="og:image" content="https://cyberfugue.github.io/flatland/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/flatland/img/share.jpg">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap">
+<style>
+  /* the app's own dark, its teal and its gold: deliberately one theme */
+  :root {
+    --bg: #020306;
+    --ink: #e6e0d0;
+    --ink-faint: #8a93a6;
+    --fg: #f3efe4;
+    --teal: #33f0d0;
+    --gold: #f0d890;
+    --line: rgba(140, 160, 200, 0.18);
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --sans: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 1.12rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gold); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+  .kicker { font-family: var(--sans); font-weight: 500; letter-spacing: .26em; font-size: .75rem; color: var(--teal); text-transform: uppercase; margin: 0; }
+  /* the four worlds side by side, the plane's line of light under the title */
+  .hero { position: relative; min-height: min(100svh, 60rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: 0 var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; }
+  .hero picture, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(2,3,6,.05) 0%, rgba(2,3,6,0) 30%, rgba(2,3,6,.7) 62%, var(--bg) 100%); }
+  .hero > *:not(picture) { position: relative; z-index: 2; }
+  .hero h1 { font-weight: 400; margin: .5rem 0 0; font-size: clamp(3rem, 12vw, 6.5rem); letter-spacing: .2em; padding-left: .2em; line-height: .95; color: var(--fg); text-transform: uppercase; text-shadow: 0 0 40px rgba(51,240,208,.35), 0 0 2px rgba(0,0,0,.9); }
+  .hero h1 span { display: block; font-size: .3em; font-style: italic; text-transform: none; letter-spacing: .04em; color: var(--ink-faint); margin-top: .6em; }
+  .hero .plane { width: min(40rem, 90%); height: 2px; margin: 1.4rem auto 0; background: linear-gradient(90deg, transparent, rgba(51,240,208,.8), transparent); box-shadow: 0 0 24px rgba(51,240,208,.6); }
+  /* wide screens: the four worlds whole, the image never cropped at the sides */
+  @media (min-width: 701px) {
+    .hero { min-height: 0; }
+    .hero::after { display: none; }
+    .hero picture { position: relative; display: block; width: 100vw; margin: 0 0 -8vw; }
+    .hero img { position: static; width: 100%; height: auto; -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
+  }
+  .lede { max-width: 34rem; margin: 1.4rem auto 0; font-size: 1.18rem; text-shadow: 0 0 12px var(--bg); }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--line); border-radius: 999px; background: rgba(12,16,26,.7); padding: .8em 1.5em; font-family: var(--sans); font-size: .95rem; color: var(--fg); text-decoration: none; backdrop-filter: blur(6px); }
+  .btn.primary { border-color: rgba(240,216,144,.75); color: var(--gold); box-shadow: 0 0 20px rgba(240,216,144,.2); }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { border-color: var(--gold); color: #fff; }
+  .note { margin: .9rem 0 0; color: var(--ink-faint); font-size: .95rem; font-style: italic; }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-weight: 400; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.1; margin: 0 0 1rem; color: var(--fg); }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.6rem auto 0; max-width: 32rem; font-style: italic; color: var(--ink-faint); }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--sans); font-weight: 500; color: var(--teal); font-size: .9rem; letter-spacing: .2em; }
+  .feature h3 { font-weight: 400; font-size: clamp(1.6rem, 4.5vw, 2.1rem); line-height: 1.15; margin: .3rem 0 .8rem; color: var(--fg); }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .5rem; background: linear-gradient(145deg, #182028, #05070b); box-shadow: 0 0 0 1px rgba(51,240,208,.25), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(51,240,208,.12); }
+  .phone img { border-radius: 1.75rem; width: 100%; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* what is free, and the purchase */
+  .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 46rem; margin: 1.5rem auto 0; }
+  .card { border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.4rem 1.2rem; background: rgba(51,240,208,.03); }
+  .card.buy { border-color: rgba(240,216,144,.55); background: radial-gradient(ellipse at 50% 0%, rgba(240,216,144,.1), transparent 70%); }
+  .card h3 { font-family: var(--sans); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; font-size: .8rem; margin: 0 0 .7rem; color: var(--teal); }
+  .card.buy h3 { color: var(--gold); }
+  .card ul { margin: 0; padding-left: 1.1rem; }
+  .card li { margin: .25rem 0; }
+  @media (min-width: 700px) { .offer { grid-template-columns: 1fr 1fr; } }
+  .center { text-align: center; }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--ink-faint); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; font-family: var(--sans); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <picture>
+    <source media="(max-width: 700px)" srcset="img/hero-tall.jpg" width="780" height="1337">
+    <img src="img/hero.jpg" alt="The four worlds side by side: Lineland's single line of light, Flatland seen from above, the Sphere passing through the plane in Spaceland, and a slice of a tesseract in Hyperland" width="1920" height="823">
+  </picture>
+  <p class="kicker">Edwin A. Abbott · 1884</p>
+  <h1>Flatland<span>for iPhone and iPad</span></h1>
+  <div class="plane" aria-hidden="true"></div>
+  <p class="lede">A Romance of Many Dimensions, read aloud, as a book you can walk into: from Lineland, through Flatland and Spaceland, to the fourth dimension.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">The first three sections are free in the app.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <h2>A world of two dimensions</h2>
+    <p>In 1884 a London headmaster wrote the memoir of A Square, a gentleman of a world with only two dimensions, where women are Straight Lines, priests are Circles, and nobody can see anything but a line. Then a Sphere passes through his plane, and lifts him out of it. Flatland has been read ever since as a satire on Victorian society and as the best way into the idea of a fourth dimension. This edition lets you go there.</p>
+    <blockquote>“I call our world Flatland, not because we call it so, but to make its nature clearer to you, my happy readers, who are privileged to live in Space.”</blockquote>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">1D</div>
+        <h3>Lineland</h3>
+        <p>A single beam of light, whose people can never pass one another. Walk along it and hear a tone rise as your neighbours draw near, and meet the King who can see nothing but a Point, with Abbott’s own figure of his kingdom drawn in light beside the words.</p>
+      </div>
+      <div class="phone"><img src="img/lineland.jpg" alt="Lineland: points of coloured light along one line, with Abbott's Figure 6, My view of Lineland, above the passage from §13" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">2D</div>
+        <h3>Flatland</h3>
+        <p>Walk as A Square among Triangles, Pentagons and Hexagons, in the fog that lets its people tell one another apart. A strip at the top shows all that A Square can see: one line, brighter where things are near.</p>
+      </div>
+      <div class="phone"><img src="img/flatland.jpg" alt="Flatland: Abbott's Figure 3, a Triangle and a Pentagon and the lines the eye sees, above the passage from §6, Of Recognition by Sight" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">3D</div>
+        <h3>A Stranger from Space</h3>
+        <p>Look down on Flatland from Spaceland, and lower the Sphere through the plane. Its circle grows from a point, swells, shrinks and vanishes, and a window shows what A Square sees of it from inside the plane.</p>
+      </div>
+      <div class="phone"><img src="img/sphere.jpg" alt="Spaceland: the plane of Flatland seen from above, the Sphere half through it, a cube beside it, and an inset of the view from inside the plane" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">4D</div>
+        <h3>The fourth dimension</h3>
+        <p>In Hyperland, turn a tesseract or a hypersphere through the fourth dimension, and slide a three-dimensional slice through it, as the Sphere slid through Flatland. Its shadow and the line where it meets Flatland are drawn with it.</p>
+      </div>
+      <div class="phone"><img src="img/hyperland.jpg" alt="Hyperland: a slice of a rotating tesseract inside its four-dimensional shadow, with the slider for the slice and the rotation planes" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">◉</div>
+        <h3>Read aloud, word by word</h3>
+        <p>Ruth Golding’s LibriVox reading of the whole book is inside the app. Each word is lit as she says it, and the worlds follow her voice: to Lineland when A Square dreams of it, to Spaceland when the Sphere lifts him out, and to Pointland, humming alone. Read along, follow captions, or just listen. It plays with the screen locked.</p>
+      </div>
+      <div class="phone"><img src="img/voice.jpg" alt="Spaceland during the reading of §18, the words lit as they are spoken" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">§</div>
+        <h3>Abbott’s figures, redrawn in light</h3>
+        <p>The complete book: all twenty-two sections, the title page and dedication, and the editor’s preface to the second edition. Abbott’s eleven figures are redrawn as luminous line art, worked out from the geometry, and draw themselves in as you reach them; the 1884 originals are a tap away.</p>
+      </div>
+      <div class="phone"><img src="img/figures.jpg" alt="The reader at §6, with Abbott's figure of a Hexagon and the lines of sight redrawn in light" width="780" height="1696" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>Begin free</h2>
+    <p>No subscription, no ads, no account.</p>
+  </div>
+  <div class="offer">
+    <div class="card">
+      <h3>Free</h3>
+      <ul>
+        <li>§1 to §3, read and heard: the nature of Flatland, its climate and houses, and its inhabitants</li>
+        <li>All four worlds to explore: Lineland, Flatland, Spaceland and Hyperland</li>
+      </ul>
+    </div>
+    <div class="card buy">
+      <h3>The whole book · $3.99</h3>
+      <ul>
+        <li>The rest of the book, read and read aloud: Lineland and its Monarch, the coming of the Sphere, Spaceland, Pointland and A Square’s prison</li>
+        <li>Bought once, yours for good</li>
+        <li>Restore it free on your other devices</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p>The text is the 1884 second edition of <em>Flatland: A Romance of Many Dimensions</em>, in the public domain, as are Abbott’s figures and Ruth Golding’s LibriVox recording. The four worlds, the redrawn figures and the sound were made for this edition.</p>
+    <p>Everything is inside the app and works with no connection. The app collects no data. It works on iPhone and iPad with iOS 15 or later; headphones are best.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>Flatland · an immersive edition of Edwin A. Abbott’s 1884 book</p>
+</footer>
+
+</body>
+</html>
