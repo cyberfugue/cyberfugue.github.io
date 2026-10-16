@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Oz Books App</title>
+<meta name="description" content="The thirty-two public-domain Oz books, by L. Frank Baum, Ruth Plumly Thompson and Jack Snow, with every one of their original pictures, a map of every journey and the people of Oz. For iPhone and iPad.">
+<link rel="icon" href="icon.png" type="image/png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/oz/">
+<meta property="og:title" content="The Oz Books, for iPhone and iPad">
+<meta property="og:description" content="Every Oz book in the public domain, with all their original pictures by W. W. Denslow, John R. Neill and Frank Kramer, a map of every journey, and the people of Oz.">
+<meta property="og:image" content="https://cyberfugue.github.io/oz/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/oz/img/share.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&family=Sorts+Mill+Goudy:ital@0;1&display=swap">
+<style>
+  /* the cream paper and emerald ink of the edition: deliberately one theme */
+  :root {
+    --paper: #f5f0e1;
+    --paper-2: #ece5d0;
+    --ink: #1c2a23;
+    --ink-2: #5d6b60;
+    --gold: #1d7a4c;
+    --brick: #c9961e;
+    --rule: #d4ccb4;
+    --display: "Goudy Bookletter 1911", "Sorts Mill Goudy", Georgia, "Times New Roman", serif;
+    --body: "Sorts Mill Goudy", Georgia, "Times New Roman", serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gold); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+  em, i { font-style: italic; }
+
+  /* Dorothy and the Lion on the yellow brick road */
+  .hero { display: grid; gap: 2.5rem; align-items: center; max-width: 68rem; margin: 0 auto; padding: calc(3rem + env(safe-area-inset-top, 0px)) var(--gutter) clamp(3rem, 8vw, 5rem); }
+  .hero figure { margin: 0; justify-self: center; width: min(24rem, 80vw); }
+  .hero figure img { box-shadow: 0 0 0 1px var(--rule), 0 24px 50px rgba(28, 42, 35, .18); }
+  .hero figcaption { margin-top: .7rem; font-style: italic; font-size: .9rem; color: var(--ink-2); text-align: center; }
+  .kicker { font-family: var(--display); letter-spacing: .14em; font-size: .9rem; color: var(--ink-2); margin: 0; }
+  .hero h1 { font-family: var(--display); font-weight: 400; margin: .5rem 0 0; font-size: clamp(3rem, 10vw, 5.6rem); line-height: .95; }
+  .hero h1 span { display: block; font-family: var(--body); font-style: italic; font-size: .36em; color: var(--ink-2); margin-top: .5em; }
+  .lede { max-width: 33rem; margin: 1.5rem 0 0; font-size: 1.25rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--ink); background: var(--ink); color: var(--paper); padding: .8em 1.3em; font-family: var(--display); letter-spacing: .05em; font-size: 1.05rem; text-decoration: none; }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { box-shadow: 3px 3px 0 var(--gold); }
+  .note { margin: .9rem 0 0; color: var(--ink-2); font-size: 1rem; font-style: italic; }
+  @media (min-width: 820px) { .hero { grid-template-columns: 1.15fr 1fr; gap: 4rem; } }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; margin: 0 0 1rem; }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.6rem auto 0; max-width: 32rem; font-style: italic; color: var(--ink-2); }
+  .band { background: var(--paper-2); border-block: 1px solid var(--rule); }
+
+  /* each part beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--rule); }
+  .feature .num { font-family: var(--display); color: var(--gold); font-size: 1.1rem; letter-spacing: .1em; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.1; margin: .2rem 0 .8rem; }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .55rem; background: linear-gradient(145deg, #2c3d33, #111a15); box-shadow: 0 0 0 1px rgba(28, 42, 35, .25), 0 26px 50px rgba(28, 42, 35, .28); }
+  .phone img { border-radius: 1.7rem; width: 100%; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* what is free, and the purchases */
+  .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 64rem; margin: 1.5rem auto 0; }
+  .card { border: 1px solid var(--rule); padding: 1.4rem 1.4rem 1.2rem; background: var(--paper); }
+  .card.buy { border-color: var(--gold); box-shadow: 4px 4px 0 var(--brick); }
+  .card h3 { font-family: var(--display); font-weight: 400; letter-spacing: .06em; font-size: 1.3rem; margin: 0 0 .6rem; color: var(--gold); }
+  .card ul { margin: 0; padding-left: 1.1rem; }
+  .card li { margin: .25rem 0; }
+  @media (min-width: 860px) { .offer { grid-template-columns: 1fr 1fr 1fr; } }
+  .center { text-align: center; }
+  .small { font-size: 1rem; color: var(--ink-2); }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--rule); text-align: center; color: var(--ink-2); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div>
+    <p class="kicker">L. Frank Baum, Ruth Plumly Thompson and Jack Snow · 1900–1949</p>
+    <h1>The Oz Books<span>for iPhone and iPad</span></h1>
+    <p class="lede">Every Oz book in the public domain, thirty-two of them, from Dorothy’s cyclone to the Shaggy Man’s Love Magnet, with every one of their original pictures, a map of every journey and the people you meet along the way.</p>
+    <div class="ctas">
+      <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+      <span class="btn soon">Coming soon to the App Store</span>
+    </div>
+    <p class="note"><i>The Wonderful Wizard of Oz</i> is free in the app.</p>
+  </div>
+  <figure>
+    <img src="img/hero.jpg" alt="W. W. Denslow’s colour plate of Dorothy scolding the Cowardly Lion on the yellow brick road, with the Tin Woodman, the Scarecrow and Toto" width="600" height="805">
+    <figcaption>W. W. Denslow, for <i>The Wonderful Wizard of Oz</i>, 1900</figcaption>
+  </figure>
+</header>
+
+<section class="band">
+  <div class="intro">
+    <h2>The books as they were first printed</h2>
+    <p>The Oz books were among the most lavish children’s books of their day: colour plates, drawings printed in coloured inks, pictorial initials and lettered chapter headings. This edition keeps all 3,552 of those pictures, each beside the passage it shows, with the complete text of every book.</p>
+    <blockquote>“There is no place like home.”</blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>Thirty-two books</h3>
+        <p>Baum’s fourteen Oz books and his <i>Little Wizard Stories</i>, the fifteen Ruth Plumly Thompson wrote after him as the new Royal Historian of Oz, and Jack Snow’s two. Each in the order it was published, with its contents, its pictures and its own map.</p>
+      </div>
+      <div class="phone"><img src="img/shelf.jpg" alt="The library of Oz books, each with its cover picture, year and a line about the story" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>Read with the pictures</h3>
+        <p>The chapter headings, drawings and colour plates of W. W. Denslow, John R. Neill and Frank Kramer sit where the books printed them. Choose your text size and Day or Night, and the app keeps your place in every book.</p>
+      </div>
+      <div class="phone"><img src="img/reading.jpg" alt="Chapter XI of The Wonderful Wizard of Oz, The Wonderful City of Oz, under Denslow’s green chapter heading" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">III</div>
+        <h3>Every picture, full size</h3>
+        <p>Tap any picture to see it whole, with a description and a link to its passage. Each book has a gallery of its colour plates, chapter headings and small drawings. <i>The Marvelous Land of Oz</i> comes in two editions, and the colour plates of <i>Tik-Tok of Oz</i> and <i>The Magic of Oz</i> are restored from first-edition copies.</p>
+      </div>
+      <div class="phone"><img src="img/plate.jpg" alt="Denslow’s colour plate “I am the Witch of the North”, open full size with its description" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">IV</div>
+        <h3>A map of every journey</h3>
+        <p>Oz and the countries around it, with the road each book travels: 309 stops across the Munchkin, Winkie, Gillikin and Quadling Countries, the lands beyond the desert and under the earth. Pick a stop to see what happens there and open the book at that page. The stops you have read past turn gold.</p>
+      </div>
+      <div class="phone"><img src="img/map.jpg" alt="The map of Oz, its four countries in their colours, with the road of a journey running to the Emerald City" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>The people of Oz</h3>
+        <p>182 people, from Dorothy and Toto to the King of the Fairy Beavers. The first mention of each in a chapter is underlined: tap it for a short note and their portrait. Each book has a reading guide too, for families, classes and book groups.</p>
+      </div>
+      <div class="phone"><img src="img/people.jpg" alt="A note on Toto, with his picture, opened from his name in the text" width="780" height="1710" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">VI</div>
+        <h3>Your own marks</h3>
+        <p>Select words to highlight them, add a note or bookmark the place. Search one book or all of them. Everything is inside the app and reads without a connection.</p>
+      </div>
+      <div class="phone"><img src="img/marks.jpg" alt="A highlighted passage in the first chapter of The Wonderful Wizard of Oz, with the reader’s note about Kansas being all gray" width="780" height="1710" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap center">
+    <h2>Begin free</h2>
+    <p>No subscription, no ads, no account. Each collection is bought once and shared with your family.</p>
+  </div>
+  <div class="offer">
+    <div class="card">
+      <h3>Free</h3>
+      <ul>
+        <li><i>The Wonderful Wizard of Oz</i>, complete, with all of Denslow’s pictures</li>
+        <li>Its journey on the map, its people and its reading guide</li>
+        <li>A look at every other book: its chapters, journey, people and guide</li>
+      </ul>
+    </div>
+    <div class="card buy">
+      <h3>Baum’s Oz</h3>
+      <ul>
+        <li>The thirteen Oz books Baum wrote after the Wizard, from <i>The Marvelous Land of Oz</i> to <i>Glinda of Oz</i></li>
+        <li>His six <i>Little Wizard Stories</i></li>
+        <li>All their pictures by John R. Neill</li>
+      </ul>
+    </div>
+    <div class="card buy">
+      <h3>The Royal Historians</h3>
+      <ul>
+        <li>Fifteen Oz books by Ruth Plumly Thompson, from <i>The Royal Book of Oz</i> to <i>Ozoplaning with the Wizard of Oz</i></li>
+        <li>Jack Snow’s <i>The Magical Mimics in Oz</i> and <i>The Shaggy Man of Oz</i></li>
+        <li>All their pictures, by Neill and Frank Kramer</li>
+      </ul>
+    </div>
+  </div>
+  <p class="center small" style="max-width:40rem;margin:1.5rem auto 0"><b>The Complete Oz</b> brings both collections together, with every Oz book added later. Thompson’s books and Snow’s are offered only where they are in the public domain.</p>
+</section>
+
+<section>
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p>The text and pictures come from the illustrated first editions, as transcribed by volunteers, with colour plates for <i>Tik-Tok of Oz</i> and <i>The Magic of Oz</i> from copies scanned by the Internet Archive. The map of Oz, the notes on the people, the descriptions of the pictures and the reading guides were made for this edition.</p>
+    <p>The app collects no data. It works on iPhone and iPad.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>The Oz Books · an illustrated edition of the Oz books of L. Frank Baum, Ruth Plumly Thompson and Jack Snow</p>
+</footer>
+
+</body>
+</html>
