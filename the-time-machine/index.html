@@ -75,14 +75,14 @@
     .feature:nth-of-type(even) .phone { order: -1; }
   }
 
-  /* what is free, and the two purchases */
+  /* what is free, and the purchase */
   .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 64rem; margin: 1.5rem auto 0; }
   .card { border: 1px solid var(--line); padding: 1.4rem 1.4rem 1.2rem; background: rgba(214,170,85,.03); }
   .card.buy { border-color: rgba(214,170,85,.55); background: radial-gradient(ellipse at 50% 0%, rgba(214,170,85,.12), transparent 70%); }
   .card h3 { font-family: var(--display-sc); font-weight: 400; letter-spacing: .18em; text-transform: lowercase; font-size: 1rem; margin: 0 0 .6rem; color: var(--gold); }
   .card ul { margin: 0; padding-left: 1.1rem; }
   .card li { margin: .2rem 0; }
-  @media (min-width: 860px) { .offer { grid-template-columns: 1fr 1fr 1fr; } }
+  @media (min-width: 860px) { .offer { grid-template-columns: 1fr 1fr; max-width: 46rem; } }
   .center { text-align: center; }
 
   .about { max-width: 40rem; margin: 0 auto; }
@@ -185,15 +185,9 @@
       </ul>
     </div>
     <div class="card buy">
-      <h3>The whole book</h3>
+      <h3>The whole edition</h3>
       <ul>
         <li>The rest of the book, read and read aloud</li>
-        <li>Restore it free on your other devices</li>
-      </ul>
-    </div>
-    <div class="card buy">
-      <h3>The whole journey</h3>
-      <ul>
         <li>The voyage itself, with the levers in your hands, all the way to the last beach and home</li>
         <li><em>Take the machine</em>, the open voyage to any year</li>
         <li>Every moment of the journey to return to</li>
