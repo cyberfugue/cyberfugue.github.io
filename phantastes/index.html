@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phantastes App</title>
+<meta name="description" content="George MacDonald's Phantastes (1858), complete, with John Bell's twenty-five plates brought to life, read inside a painted Fairy Land, and read aloud word by word. For iPhone and iPad.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/phantastes/">
+<meta property="og:title" content="Phantastes, for iPhone and iPad">
+<meta property="og:description" content="MacDonald's faerie romance, complete, with its plates alive, a painted Fairy Land, and two readers, word by word.">
+<meta property="og:image" content="https://cyberfugue.github.io/phantastes/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/phantastes/img/share.jpg">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital@0;1&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap">
+<style>
+  /* the app's own dress: the wood at night, ivory, gilt and moonlight; deliberately one theme */
+  :root {
+    --bg: #070a08;
+    --ink: #e9e2cf;
+    --ink-faint: #a39d8a;
+    --fg: #f4ecd8;
+    --gold: #d6b062;
+    --moon: #a9c3ea;
+    --rose: #e2a9c6;
+    --line: rgba(233, 226, 207, 0.14);
+    --display: "IM Fell English", Georgia, serif;
+    --sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+    --body: "EB Garamond", Garamond, Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1.18rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gold); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+  .kicker { font-family: var(--sc); letter-spacing: .3em; font-size: .85rem; color: var(--gold); text-transform: lowercase; margin: 0; }
+  /* the wood at night behind the title */
+  .hero { position: relative; min-height: min(100svh, 60rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: 0 var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; }
+  .hero picture, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; z-index: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(7,10,8,.1) 0%, rgba(7,10,8,0) 25%, rgba(7,10,8,.72) 60%, var(--bg) 100%); }
+  .hero > *:not(picture) { position: relative; z-index: 2; }
+  .hero h1 { font-family: var(--display); font-weight: 400; margin: .5rem 0 0; font-size: clamp(3.4rem, 14vw, 7.5rem); line-height: .9; color: var(--fg); text-shadow: 0 0 46px rgba(214,176,98,.4), 0 0 2px rgba(0,0,0,.9); }
+  .hero h1 span { display: block; font-size: .28em; font-style: italic; letter-spacing: .05em; color: var(--gold); margin-top: .6em; }
+  .star { color: var(--gold); font-size: 2rem; line-height: 1; text-shadow: 0 0 18px rgba(214,176,98,.7); margin-bottom: .4rem; }
+  .lede { max-width: 34rem; margin: 1.4rem auto 0; font-size: 1.22rem; text-shadow: 0 0 12px var(--bg); }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: rgba(7,10,8,.7); padding: .8em 1.5em; font-family: var(--sc); letter-spacing: .14em; text-transform: lowercase; font-size: 1rem; color: var(--fg); text-decoration: none; backdrop-filter: blur(6px); }
+  .btn.primary { border-color: rgba(214,176,98,.75); color: var(--gold); box-shadow: 0 0 22px rgba(214,176,98,.22); }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { border-color: var(--gold); color: #fff; }
+  .note { margin: .9rem 0 0; color: var(--ink-faint); font-size: 1rem; font-style: italic; }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.1; margin: 0 0 1rem; color: var(--fg); }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.6rem auto 0; max-width: 32rem; font-style: italic; color: var(--ink-faint); }
+  blockquote cite { display: block; margin-top: .5rem; font-style: normal; font-family: var(--sc); letter-spacing: .14em; font-size: .85rem; text-transform: lowercase; }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--display); color: var(--gold); font-size: 1.4rem; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.7rem, 4.5vw, 2.2rem); line-height: 1.15; margin: .2rem 0 .8rem; color: var(--fg); }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .5rem; background: linear-gradient(145deg, #1a2219, #050705); box-shadow: 0 0 0 1px rgba(214,176,98,.25), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(214,176,98,.1); }
+  .phone img { border-radius: 1.75rem; width: 100%; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  .offer { max-width: 40rem; margin: 1.5rem auto 0; border: 1px solid rgba(214,176,98,.5); padding: 1.4rem 1.6rem 1.2rem; background: radial-gradient(ellipse at 50% 0%, rgba(214,176,98,.1), transparent 70%); }
+  .offer ul { margin: 0; padding-left: 1.1rem; }
+  .offer li { margin: .3rem 0; }
+  .center { text-align: center; }
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--ink-faint); font-size: 1rem; }
+  footer nav { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; font-family: var(--sc); letter-spacing: .12em; text-transform: lowercase; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <picture>
+    <source media="(max-width: 700px)" srcset="img/hero-tall.jpg" width="780" height="1337">
+    <img src="img/hero.jpg" alt="A wood at night under a half-moon, a stream winding through grass, and small lights among the flowers" width="1920" height="823">
+  </picture>
+  <div class="star" aria-hidden="true">✦</div>
+  <p class="kicker">George MacDonald · 1858</p>
+  <h1>Phantastes<span>a faerie romance, for iPhone and iPad</span></h1>
+  <p class="lede">The whole book, with its plates alive, read inside a painted Fairy Land, and read aloud by either of two readers, every word lit as it is spoken.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">The first three chapters free; the whole book with one purchase.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <h2>A little window upon a great world</h2>
+    <p>On the morning after his twenty-first birthday, Anodos wakes to find the stream from his washing-basin running across his carpet, and his room turning into a wood. He follows it into Fairy Land: to the Ash and the Beech, a lady sleeping in alabaster, a palace of white marble, a Shadow that will not leave him, and a cottage of four doors by the sea. George MacDonald’s first prose romance was the book that, as C. S. Lewis said, baptised his imagination.</p>
+    <blockquote>“In good sooth, my masters, this is no door. Yet is it a little window, that looketh upon a great world.”</blockquote>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>The plates come alive</h3>
+        <p>John Bell’s twenty-five plates for the illustrated edition of 1894 sit beside the passages they show. When one reaches the middle of the screen it begins, very quietly, to live: the sea moves, the moon breathes, a fire flickers, mist drifts, specks of light go through the air. A plate seen for the first time develops out of the paper, as a print does.</p>
+      </div>
+      <div class="phone"><img src="img/plate.jpg" alt="Chapter IV: John Bell's plate of Anodos among the flower-fairies, Curious little figures shot up their heads, in the text" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>Read aloud, word by word</h3>
+        <p>Both LibriVox readings are inside the app: Brad Powers and Thomas A. Copeland. Every word of the book is timed to each, so the word being spoken is lit, the page follows the voice, and Fairy Land and its sound follow it too. Change readers at the same place; tap any paragraph to hear it from there. It plays with the screen locked.</p>
+      </div>
+      <div class="phone"><img src="img/voice.jpg" alt="Chapter I read aloud: the words already said bright, the word being spoken lit, those to come waiting dim, with the reader's controls beneath" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">III</div>
+        <h3>Sing her out of the stone</h3>
+        <p>Where the book gives Anodos something to do, you can do it: open the little drawers of his father’s old secretary; play a harp to sing the marble lady out of her alabaster, the stone clearing from her face as the song goes on; touch the maiden’s crystal globe, gently, three times; sing in the hall of Phantasy; choose among the old woman’s four doors.</p>
+      </div>
+      <div class="phone"><img src="img/marble.jpg" alt="Sing to the marble: John Bell's plate of the white lady freed from the alabaster, above the harp" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">IV</div>
+        <h3>A Shadow that follows the page</h3>
+        <p>In the eighth chapter Anodos opens a closet he was told not to, and finds his Shadow. From then on it follows the page as it follows him, and where it falls the plates turn grey and the painted world drains of its colour, as the fairy child in the book turned commonplace when he stood in it.</p>
+      </div>
+      <div class="phone"><img src="img/shadow.jpg" alt="Chapter IX: the Shadow lying across the page and over a plate turned grey" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>A painted, sounding Fairy Land</h3>
+        <p>Behind the text the wood is painted live: Anodos’s room becoming the forest, the fairies’ flowers lit at night, the storm over the Beech, the white palace by the river, the hall of statues, the wintry sea and the island cottage. Step out to look around, and the place answers your touch. Every sound and the music, in the mode of each place, is made as you read.</p>
+      </div>
+      <div class="phone"><img src="img/look.jpg" alt="Looking around in Chapter IV: the wood at night with the moon and the great Beech, and a card with the Beech's words" width="780" height="1696" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">VI</div>
+        <h3>A chart of Fairy Land</h3>
+        <p>MacDonald drew no map; this one is made from the book, as an engraved chart: from Anodos’s house through the wood, by the river to the palace, under the earth, out to the sea and the island, and home again. The way read so far is gilded; the rest lies under mist.</p>
+      </div>
+      <div class="phone"><img src="img/map.jpg" alt="The chart of Fairy Land, the way read so far gilded across it" width="780" height="1696" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>Begin free; the whole book with one purchase</h2>
+    <p>The mottoes and the first three chapters are free, with everything the edition does. One purchase opens the rest: no subscription, no ads, no account.</p>
+  </div>
+  <div class="offer">
+    <ul>
+      <li>All twenty-five chapters, with every motto, song and ballad, and the tales Anodos reads in the palace library</li>
+      <li>John Bell’s twenty-five plates of 1894, alive</li>
+      <li>Two complete readings, word by word, inside the app</li>
+      <li>The painted world, the moments, the chart, the sound and the music</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p><em>Phantastes: A Faerie Romance for Men and Women</em> was first published in 1858. The text is the 1905 edition, edited by the author’s son Greville MacDonald, in the public domain. John Bell’s plates come from Chatto &amp; Windus’s edition of 1894; Greville MacDonald so disliked them that he bought up that edition and had it pulped, but some copies survived. The readings by Brad Powers and Thomas A. Copeland are LibriVox’s, in the public domain. The painted Fairy Land, the life of the plates, the sound and music, the chart and the moments were made for this edition.</p>
+    <p>Everything is inside the app and works with no connection. The app collects no data. Headphones are best.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>Phantastes · an immersive edition of George MacDonald’s faerie romance</p>
+</footer>
+
+</body>
+</html>
