@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The War of the Worlds App</title>
+<meta name="description" content="H. G. Wells's The War of the Worlds (1898), complete, with the war drawn live in ink beside the text as you read it, Alvim Corrêa's plates of 1906, and two readers, word by word. For iPhone and iPad.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/the-war-of-the-worlds/">
+<meta property="og:title" content="The War of the Worlds, for iPhone and iPad">
+<meta property="og:description" content="Wells's war, complete, drawn live in ink as you read it, with Alvim Corrêa's plates and two readers, word by word.">
+<meta property="og:image" content="https://cyberfugue.github.io/the-war-of-the-worlds/img/reading.jpg">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/the-war-of-the-worlds/img/reading.jpg">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,900;1,400&display=swap">
+<style>
+  /* the edition's own dress: newsprint paper, a newspaper's black rule, the Heat-Ray's orange and the weed's red; one theme */
+  :root {
+    --paper: #ece3d0;
+    --paper-2: #e3d8c1;
+    --ink: #1d1915;
+    --ink-2: #5b5043;
+    --ink-3: #8a7c66;
+    --rule: #a39274;
+    --night: #14110e;
+    --pale: #e9dfc9;
+    --ray: #f0a64a;
+    --weed: #b2271b;
+    --serif: "Old Standard TT", "Iowan Old Style", Georgia, serif;
+    --display: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--weed); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+  .kicker { font-family: var(--serif); font-variant: small-caps; letter-spacing: .22em; font-size: .95rem; margin: 0; }
+
+  /* the title over the drawn heath at night */
+  .hero { position: relative; min-height: min(100svh, 56rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: calc(3rem + env(safe-area-inset-top, 0px)) var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; background: var(--night); color: var(--pale); }
+  .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: 0; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(20,17,14,.5), rgba(20,17,14,.05) 30%, rgba(20,17,14,.55) 60%, var(--night) 100%); }
+  .hero > *:not(img) { position: relative; z-index: 2; }
+  .hero .kicker { color: var(--pale); opacity: .85; }
+  .hero h1 { font-family: var(--display); font-weight: 900; margin: .4rem 0 0; font-size: clamp(3.2rem, 13vw, 7.6rem); line-height: .92; text-transform: uppercase; letter-spacing: .01em; color: var(--pale); text-shadow: 0 0 40px rgba(0,0,0,.8); }
+  .hero h1 i { display: block; font-weight: 400; text-transform: none; font-size: .36em; margin: .1em 0 .05em; }
+  .lede { max-width: 34rem; margin: 1.4rem auto 0; font-size: 1.15rem; text-shadow: 0 0 14px var(--night); }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid rgba(233,223,201,.6); background: rgba(20,17,14,.6); padding: .75em 1.5em; font-family: var(--serif); font-size: 1.05rem; color: var(--pale); text-decoration: none; }
+  .btn.primary { background: var(--pale); color: var(--night); border-color: var(--pale); }
+  .btn.soon { cursor: default; }
+  @media (min-width: 900px) {
+    .hero { min-height: min(100svh, 52rem); justify-items: end; align-content: center; text-align: left; padding-right: 5vw; }
+    .hero > *:not(img) { width: min(34vw, 30rem); }
+    .hero::after { background: linear-gradient(90deg, rgba(20,17,14,0) 40%, rgba(20,17,14,.7) 75%), linear-gradient(rgba(20,17,14,0) 70%, var(--night) 100%); }
+    .hero h1 { font-size: clamp(3.4rem, 6vw, 6rem); }
+    .hero .lede { margin-left: 0; margin-right: 0; }
+    .hero > img { width: 118%; max-width: none; left: -18%; right: auto; }
+    .hero .ctas { justify-content: flex-start; }
+  }
+  .note { margin: .9rem 0 0; opacity: .75; font-size: .98rem; font-style: italic; }
+
+  /* the paper: a newspaper's head and columns */
+  .masthead { border-top: 6px solid var(--night); border-bottom: 1px solid var(--night); margin: 0 auto; max-width: 68rem; padding: .5rem 0; display: flex; justify-content: space-between; gap: 1rem; font-variant: small-caps; letter-spacing: .14em; font-size: .9rem; color: var(--ink-2); }
+  section { padding: clamp(2.5rem, 8vw, 5.5rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 900; font-size: clamp(2rem, 6vw, 3rem); line-height: 1.05; margin: 0 0 1rem; }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.8rem auto 0; max-width: 34rem; font-style: italic; color: var(--ink-2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 1rem 0; }
+  blockquote cite { display: block; margin-top: .5rem; font-style: normal; font-variant: small-caps; letter-spacing: .14em; font-size: .9rem; }
+
+  .feature { display: grid; grid-template-columns: 1fr; gap: 1.6rem; align-items: center; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--rule); }
+  .feature .num { font-variant: small-caps; letter-spacing: .2em; color: var(--weed); font-size: .95rem; }
+  .feature h3 { font-family: var(--display); font-weight: 900; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.1; margin: .2rem 0 .8rem; }
+  .feature p { margin: 0 0 .8rem; }
+  .screen { border: 1px solid var(--night); padding: 6px; background: var(--night); box-shadow: 0 18px 40px rgba(29,25,21,.28); }
+  .phone { justify-self: center; width: min(16rem, 70vw); border-radius: 2.2rem; padding: .5rem; background: var(--night); box-shadow: 0 24px 50px rgba(29,25,21,.35); }
+  .phone img { border-radius: 1.75rem; }
+  @media (min-width: 820px) {
+    .feature { grid-template-columns: 5fr 7fr; gap: 3.5rem; }
+    .feature.flip { grid-template-columns: 7fr 5fr; }
+    .feature.flip > .screen, .feature.flip > .phone { order: -1; }
+    .feature.tall { grid-template-columns: 7fr 5fr; }
+  }
+  .pair { display: grid; grid-template-columns: 1fr; gap: 1.2rem; margin-top: 1.4rem; }
+  @media (min-width: 820px) { .pair { grid-template-columns: 1fr 1fr; } }
+  figure { margin: 0; }
+  figcaption { font-size: .95rem; color: var(--ink-2); font-style: italic; margin-top: .5rem; }
+
+  .offer { max-width: 40rem; margin: 1.5rem auto 0; border: 1px solid var(--night); border-top-width: 5px; padding: 1.3rem 1.6rem 1.1rem; background: var(--paper-2); }
+  .offer ul { margin: 0; padding-left: 1.1rem; }
+  .offer li { margin: .3rem 0; }
+  .center { text-align: center; }
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.2rem var(--gutter) calc(2.2rem + env(safe-area-inset-bottom, 0px)); background: var(--night); color: var(--pale); text-align: center; font-size: 1rem; }
+  footer a { color: var(--pale); }
+  footer nav { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; font-variant: small-caps; letter-spacing: .14em; }
+  footer p { margin: 0; opacity: .75; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="A Martian fighting-machine striding over a burning common at dusk, drawn in pen and ink, Mars above it" width="1440" height="900">
+  <p class="kicker">H. G. Wells · 1898</p>
+  <h1>The War <i>of the</i> Worlds</h1>
+  <p class="lede">The whole book, with the war drawn live in ink beside the text as you read it, Alvim Corrêa’s plates of 1906, and either of two readers, every word lit as it is spoken.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">Chapters I to V free, to the Heat-Ray on Horsell Common; the whole book with one purchase.</p>
+</header>
+
+<section>
+  <div class="masthead"><span>For iPhone and iPad</span><span>Woking · Surrey · London</span></div>
+  <div class="intro" style="margin-top:2.5rem">
+    <h2>No one would have believed</h2>
+    <p>In the last years of the nineteenth century, a cylinder falls on Horsell Common, near Woking. The crowd gathers at its pit; the lid unscrews; something looks out. Within a week the Martians’ tripods are wading the Thames, the Black Smoke lies over the Home Counties, and London is emptying northward along every road. Wells tells it as a man who lived through it, and his brother who got away, writing six years after.</p>
+    <blockquote>“No one would have believed in the last years of the nineteenth century that this world was being watched keenly and closely by intelligences greater than man’s and yet as mortal as his own.”<cite>Book One, Chapter I</cite></blockquote>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>The war, drawn as you read it</h3>
+        <p>Beside the text the war is drawn live, in pen, wash and hatching, in the manner of Alvim Corrêa’s plates: the pit at sunset as the lid falls, the Heat-Ray sweeping the common, the storm on the Maybury road, the river at Shepperton, the Black Smoke, the <em>Thunder Child</em>, the red weed, dead London. What the text tells happens there, at its word: read by eye, as the paragraph comes under it; listened to, as the word is spoken. Drag it to look about.</p>
+        <p>The dateline above it keeps the day and the hour, and the page darkens with the night in the story.</p>
+      </div>
+      <div class="screen"><img loading="lazy" src="img/reading.jpg" alt="Chapter IV, The Cylinder Opens: the text on paper with Corrêa's plate of the cylinder, beside the pit at sunset drawn in ink, the great lid of the cylinder and the onlookers" width="1440" height="900" ></div>
+    </article>
+
+    <article class="feature flip">
+      <div>
+        <div class="num">II</div>
+        <h3>“And this Thing I saw!”</h3>
+        <p>The storm breaks over the hill beyond Pyrford church, and in a flash of lightning a fighting-machine strides out over the pines. The night from the study window, with the country burning towards Woking. The tripods at Shepperton wading out of the smoke. More than seventy scenes, each cued to the words that tell it.</p>
+      </div>
+      <div class="screen"><img loading="lazy" src="img/storm.jpg" alt="Chapter X, In the Storm: the text beside a drawing of a tripod striding through rain over the pines at midnight" width="1440" height="900" ></div>
+    </article>
+
+    <article class="feature tall">
+      <div>
+        <div class="num">III</div>
+        <h3>Read aloud, word by word</h3>
+        <p>Two complete LibriVox readings are inside the app: johnnyenglish and Cori Samuel. Every word of the book is timed to each, so the word being spoken is lit, the page follows the voice, and the drawing and the sound follow it too. Change readers at the same place; tap any paragraph to hear it from there. It plays with the screen locked, with a sleep timer and a choice of speeds.</p>
+        <p><strong>Watch</strong> turns the drawing full size, with the words beneath it as they are read.</p>
+      </div>
+      <div class="phone"><img loading="lazy" src="img/phone.jpg" alt="Chapter V on an iPhone: Horsell Common at twilight drawn above the page, the text below, and the bar of controls at the foot" width="393" height="852" ></div>
+    </article>
+
+    <article class="feature flip">
+      <div>
+        <div class="num">IV</div>
+        <h3>Alvim Corrêa’s plates</h3>
+        <p>The thirty-three plates of the Brussels edition of 1906, drawn by Henrique Alvim Corrêa for five hundred signed copies, set after the passages they show, with his captions. Wells is said to have said that Corrêa did more for his work with his brush than he had done with his pen. Tap one to see it full size, and swipe between them.</p>
+      </div>
+      <div class="screen"><img loading="lazy" src="img/plate.jpg" alt="Corrêa's plate The Black Smoke, tripods trailing smoke over a valley, full size in the app" width="1440" height="900" ></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>The map of the war, and its days</h3>
+        <p>A map of Surrey, Middlesex and the Thames from the book, on the real ground: where each cylinder fell, where the Martians went, the narrator’s way and his brother’s flight to the Essex coast, and the Black Smoke spreading. Drag the days from the first falling star to the dead machines on Primrose Hill; what you have read is drawn, the rest is waiting.</p>
+      </div>
+      <div class="screen"><img loading="lazy" src="img/map.jpg" alt="The map of the war: the narrator's way from Horsell Common through Woking, Pyrford and Send, with the slider of its days at the foot" width="1440" height="900" ></div>
+    </article>
+
+    <article class="feature flip">
+      <div>
+        <div class="num">VI</div>
+        <h3>Moments to do</h3>
+        <p>Where the book gives you something to see for yourself, you can: look through Ogilvy’s telescope at Mars; watch the end of the cylinder turn, and the thin circle of bright metal widen; peer through the slit in the wall of the ruined house at Sheen; keep still in the coal cellar as the tentacle comes feeling for you; follow the cry of “Ulla” across dead London; and turn about the specimen in spirits at the Natural History Museum, touching its parts.</p>
+      </div>
+      <div class="screen"><img loading="lazy" src="img/specimen.jpg" alt="The specimen in spirits: a Martian in its jar, its brain, eyes, mouth and hands marked to touch" width="1440" height="900" ></div>
+    </article>
+
+    <div class="pair">
+      <figure>
+        <div class="screen"><img loading="lazy" src="img/window.jpg" alt="Chapter XI, At the Window: the country towards Woking burning, seen through the panes of the study window" width="1440" height="900" ></div>
+        <figcaption>“It seemed indeed as if the whole country in that direction was on fire.”</figcaption>
+      </figure>
+      <figure>
+        <div class="screen"><img loading="lazy" src="img/primrose.jpg" alt="Book Two, Chapter VIII, Dead London: dawn on Primrose Hill, a dead fighting-machine against St Paul's, with birds tearing at red shreds" width="1440" height="900" ></div>
+        <figcaption>“…the tattered red shreds of flesh that dripped down upon the overturned seats on the summit of Primrose Hill.”</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>Begin free; the whole book with one purchase</h2>
+    <p>The first five chapters are free, with everything the edition does, to the night the Heat-Ray swept Horsell Common. One purchase opens the rest: no subscription, no ads, no account.</p>
+  </div>
+  <div class="offer">
+    <ul>
+      <li>All twenty-seven chapters, both Books: <em>The Coming of the Martians</em> and <em>The Earth under the Martians</em></li>
+      <li>The war drawn as you read it, from the pit on Horsell Common to the dead machines on Primrose Hill</li>
+      <li>Alvim Corrêa’s thirty-three plates of 1906</li>
+      <li>Two complete readings, word by word, inside the app</li>
+      <li>The map and its days, the moments, the sound and the music</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About this edition</h2>
+    <p><em>The War of the Worlds</em> was serialised in <em>Pearson’s Magazine</em> in 1897 and published by William Heinemann in 1898; the text is in the public domain. Henrique Alvim Corrêa’s plates are from the French translation published in Brussels by L. Vandamme in 1906, from Duke University’s copy at the Internet Archive. The readings by johnnyenglish and Cori Samuel are LibriVox’s, in the public domain. The drawn war, the sound and music (the heath at night, the hammering in the pit, the Heat-Ray’s hum, the guns, the Thames, the cry of “Ulla”), the map and the moments were made for this edition, from the book.</p>
+    <p>Everything is inside the app and works with no connection. The app collects no data. Headphones are best.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>The War of the Worlds · an immersive edition of H. G. Wells’s novel</p>
+</footer>
+
+</body>
+</html>
