@@ -12,4 +12,4 @@ Each immersive edition has its own folder, holding the app's three pages for the
 | The Time Machine | https://cyberfugue.github.io/the-time-machine/ | …/the-time-machine/support/ | …/the-time-machine/privacy/ |
 | Phantastes | https://cyberfugue.github.io/phantastes/ | …/phantastes/support/ | …/phantastes/privacy/ |
 
-A new edition adds its folder here, with all three pages, before it goes to App Store review. The edition's own repository keeps no copy (its `CLAUDE.md` says so), and its old Vercel addresses only redirect here.
+A new edition adds its folder here, with all three pages, before it goes to App Store review. The edition's own repository keeps no copy (its `CLAUDE.md` says so), and on its Vercel address, where the edition itself plays on the web, `/support/` and `/privacy/` redirect here.
