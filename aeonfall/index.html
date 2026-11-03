@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aeonfall App</title>
+<meta name="description" content="Aeonfall, a time-travelling fantasy role-playing game: turn the hours with a brass astrolabe, sail an elven sky-galleon between the stars, and walk Earth's past. For iPhone and iPad.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/aeonfall/">
+<meta property="og:title" content="Aeonfall, for iPhone and iPad">
+<meta property="og:description" content="A squire, a fallen star, and an astrolabe that turns the hours. A time-travelling fantasy RPG.">
+<meta property="og:image" content="https://cyberfugue.github.io/aeonfall/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/aeonfall/img/share.jpg">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  /* the game's own dress: night between two suns, brass, violet sand and starlight; deliberately one theme */
+  :root {
+    --night: #05040c;
+    --ink: #f2e8d0;
+    --ink-faint: #a89cba;
+    --brass: #e0b84a;
+    --brass-l: #f0d070;
+    --sand: #d6a8ff;
+    --star: #bfe8ff;
+    --bright: #fff6e0;
+    --line: rgba(224, 184, 74, 0.22);
+    --display: "Cinzel", Georgia, "Times New Roman", serif;
+    --body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--night); }
+  body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--brass-l); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* the Wandering Lark at rest on the old Skyharbor pad, at nightfall */
+  .hero { position: relative; min-height: min(100svh, 62rem); display: grid; align-content: end; justify-items: center; text-align: center; padding: 0 var(--gutter) clamp(2.5rem, 8vh, 5rem); overflow: hidden; }
+  .hero picture, .hero picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 45% 30%; z-index: 0; image-rendering: pixelated; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(5,4,12,.05) 0%, rgba(5,4,12,0) 30%, rgba(5,4,12,.62) 62%, var(--night) 100%); }
+  .hero > *:not(picture) { position: relative; z-index: 2; }
+  .hero .kicker, .hero .lede, .hero .note { text-shadow: 0 0 12px var(--night), 0 0 4px var(--night), 0 1px 2px #000; }
+  .kicker { font-family: var(--display); letter-spacing: .32em; font-size: .78rem; color: var(--sand); text-transform: uppercase; margin: 0; }
+  .hero h1 { font-family: var(--display); font-weight: 600; margin: .4rem 0 0; font-size: clamp(3rem, 12vw, 6.6rem); letter-spacing: .12em; line-height: .95; color: var(--brass-l); text-shadow: 0 0 40px rgba(214,168,255,.55), 0 3px 0 #5a3a18; }
+  .hero h1 span { display: block; font-family: var(--body); font-weight: 400; font-size: .3em; font-style: italic; letter-spacing: .05em; color: var(--ink-faint); margin-top: .5em; text-shadow: none; }
+  .lede { max-width: 34rem; margin: 1.4rem auto 0; font-size: 1.2rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid var(--line); background: rgba(5,4,12,.55); padding: .85em 1.5em; font-family: var(--display); letter-spacing: .14em; font-size: .85rem; text-transform: uppercase; color: var(--ink); text-decoration: none; backdrop-filter: blur(4px); }
+  .btn.primary { border-color: rgba(224,184,74,.7); color: var(--bright); }
+  .btn.soon { cursor: default; }
+  .btn:not(.soon):hover { border-color: var(--brass-l); color: #fff; }
+  .note { margin: .9rem 0 0; color: var(--ink-faint); font-size: .95rem; font-style: italic; }
+
+  section { padding: clamp(3rem, 9vw, 6rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 5.5vw, 2.6rem); line-height: 1.1; margin: 0 0 1rem; color: var(--bright); letter-spacing: .04em; }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  blockquote { margin: 1.6rem auto 0; max-width: 32rem; font-style: italic; color: var(--ink-faint); }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 4rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--display); color: var(--sand); font-size: 1rem; letter-spacing: .2em; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.45rem, 4.2vw, 2rem); line-height: 1.15; margin: .2rem 0 .8rem; color: var(--bright); }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .55rem; background: linear-gradient(145deg, #2a2236, #0b0812); box-shadow: 0 0 0 1px rgba(224,184,74,.2), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(214,168,255,.12); }
+  .phone img { border-radius: 1.7rem; width: 100%; image-rendering: pixelated; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* what is in it, and what never will be */
+  .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 64rem; margin: 1.5rem auto 0; }
+  .card { border: 1px solid var(--line); padding: 1.4rem 1.4rem 1.2rem; background: rgba(224,184,74,.03); }
+  .card.whole { border-color: rgba(224,184,74,.55); background: radial-gradient(ellipse at 50% 0%, rgba(214,168,255,.12), transparent 70%); }
+  .card h3 { font-family: var(--display); font-weight: 400; letter-spacing: .18em; text-transform: uppercase; font-size: .85rem; margin: 0 0 .6rem; color: var(--brass); }
+  .card ul { margin: 0; padding-left: 1.1rem; }
+  .card li { margin: .2rem 0; }
+  @media (min-width: 860px) { .offer { grid-template-columns: 1.3fr 1fr; max-width: 52rem; } }
+  .center { text-align: center; }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--ink-faint); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; font-family: var(--display); letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <picture>
+    <source media="(max-width: 700px)" srcset="img/hero-tall.jpg" width="780" height="1338">
+    <img src="img/hero.jpg" alt="An elven sky-galleon with brass star-rings for masts, resting on a glowing landing pad among ruined pillars at nightfall, a young squire standing beside her" width="1920" height="824">
+  </picture>
+  <p class="kicker">A time-travelling fantasy RPG</p>
+  <h1>Aeonfall<span>a chronicle of the sundered hours, for iPhone and iPad</span></h1>
+  <p class="lede">A squire, a fallen star, and an astrolabe that turns the hours. Sail an elven sky-galleon between the stars and through Earth's past, before a queen stops time for ever.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn primary soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">The whole game. No ads, no in-app purchases, no account.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <h2>A star falls on Thornby</h2>
+    <p>You are a squire of Caerwyn, a world of knights, elves and dragons under twin suns. One night a star falls in the orchard. It is not a star: it is a survey skiff from Earth's year 2241, and its dying pilot presses a wrist-unit into your hand with a warning about Maelis Vey, the Clockless Queen, who means to stop all of time.</p>
+    <blockquote>“A held day is not a day. It is a picture of one.” — Sir Rowan Ashby</blockquote>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>Turn the hours</h3>
+        <p>The Hourwell Astrolabe is brass rings around a glass of bright sand. Spend the sand to turn Caerwyn's three ages: the Age of Dragons, the Present, and an Ashen Future of glass statues and stilled lakes.</p>
+        <p>The ages share one ground, so you arrive exactly where you stood. Plant an ironoak a thousand years ago and walk back to find it grown.</p>
+      </div>
+      <div class="phone"><img src="img/astrolabe.jpg" alt="The Hourwell Astrolabe's dial, with its hour-marks and a glass of violet sand, listing the Age of Dragons, the Present and the Ashen Future" width="780" height="1690" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>The Wandering Lark</h3>
+        <p>An elven sky-galleon with brass star-rings for masts and a fallen star for a heart. Help her shipwright finish her in the Age of Dragons, then find her a thousand years later, sealed in a vault beneath a castle that had not been built yet.</p>
+      </div>
+      <div class="phone"><img src="img/lark.jpg" alt="The Wandering Lark resting on the landing pad at Skyharbor" width="780" height="1690" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">III</div>
+        <h3>Fold between suns</h3>
+        <p>Fly between the worlds, moons and stations of a star system, then fold between stars. Visit an ocean world of floating reed-cities, a dwarven forge-hold under a red sun, a desert of singing crystal, a jungle that grows too well, a generation ship that waited three thousand years, and two dozen uncharted systems with worlds of their own.</p>
+      </div>
+      <div class="phone"><img src="img/fold.jpg" alt="The Lark's fold chart: a map of stars with charted systems labelled and a ring showing the fold drive's range" width="780" height="1690" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">IV</div>
+        <h3>Walk Earth's past</h3>
+        <p>Set an era's anchor into the Astrolabe and step into Thebes under Ramesses the Great, Florence in 1504 with the David newly unveiled, a copper boomtown in the Arizona Territory, and the Florida coast on the eve of Apollo 11. Each age looks like its own time, and each hides a piece of a broken bell.</p>
+      </div>
+      <div class="phone"><img src="img/thebes.jpg" alt="Thebes in 1250 BC: an avenue of stone rams before a temple banded with painted hieroglyphs, and a red granite obelisk" width="780" height="1690" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">V</div>
+        <h3>A company of friends</h3>
+        <p>Eight companions walk the road with you: a knight, a hedge-witch, a starship pilot, a frontier deputy, a dwarven smith, a robot who kept watch for three thousand years, an elven sky-sailor and a reed-city pilot. Each has a story of their own to tell, and some may become more than friends.</p>
+      </div>
+      <div class="phone"><img src="img/elves.jpg" alt="A conversation with Aelindra Sunweft, the elven shipwright, in the Age of Dragons" width="780" height="1690" loading="lazy"></div>
+    </article>
+
+    <article class="feature">
+      <div>
+        <div class="num">VI</div>
+        <h3>Every pixel, painted in code</h3>
+        <p>Every tile, person, creature and starship in Aeonfall is drawn by the game itself, in the colours of the world it stands on: the timber of Thornby, the painted sandstone of Thebes, the neon of New Meridian, the singing crystal of Glassreach.</p>
+      </div>
+      <div class="phone"><img src="img/glassreach.jpg" alt="Glassreach: a pale crystal desert, with the Singer-of-Facets, a being of living crystal" width="780" height="1690" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>The whole chronicle</h2>
+    <p>Everything is in the game from the first tap.</p>
+  </div>
+  <div class="offer">
+    <div class="card whole">
+      <h3>In the game</h3>
+      <ul>
+        <li>A main quest across three ages, four eras of Earth and the stars, to recover seven chimes and face the Clockless Queen</li>
+        <li>Ten side quests, and puzzles solved across a thousand years</li>
+        <li>Thirty-one star systems, the Lark's helm, and a wrist-unit for planting beacons and recalling to them</li>
+        <li>Eight companions, and a courtship and wedding for those who want one</li>
+        <li>Swords, bows, revolvers, blasters and spells</li>
+        <li>Three save slots, and it saves itself as you play</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Never</h3>
+      <ul>
+        <li>No ads</li>
+        <li>No in-app purchases</li>
+        <li>No account or sign-in</li>
+        <li>No data collected</li>
+        <li>No connection needed</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About the game</h2>
+    <p>Aeonfall is a single-player open-world role-playing game, made without image files: every picture in it is painted by its own code, and every sound is made live. Real historical figures appear only in their public roles in the year you visit them.</p>
+    <p>The app plays entirely offline and collects no data. It works on iPhone and iPad with iOS 15 or later.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>Aeonfall · a chronicle of the sundered hours · © 2026 Paul O'Brien</p>
+</footer>
+
+</body>
+</html>
