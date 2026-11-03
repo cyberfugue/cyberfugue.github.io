@@ -12,5 +12,6 @@ Each immersive edition has its own folder, holding the app's three pages for the
 | The Time Machine | https://cyberfugue.github.io/the-time-machine/ | …/the-time-machine/support/ | …/the-time-machine/privacy/ |
 | Phantastes | https://cyberfugue.github.io/phantastes/ | …/phantastes/support/ | …/phantastes/privacy/ |
 | The War of the Worlds | https://cyberfugue.github.io/the-war-of-the-worlds/ | …/the-war-of-the-worlds/support/ | …/the-war-of-the-worlds/privacy/ |
+| Aeonfall | https://cyberfugue.github.io/aeonfall/ | …/aeonfall/support/ | …/aeonfall/privacy/ |
 
 A new edition adds its folder here, with all three pages, before it goes to App Store review. The edition's own repository keeps no copy (its `CLAUDE.md` says so), and on its Vercel address, where the edition itself plays on the web, `/support/` and `/privacy/` redirect here.
