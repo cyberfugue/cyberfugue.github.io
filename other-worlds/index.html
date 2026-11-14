@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Other Worlds App</title>
+<meta name="description" content="Six classic journeys beyond the world we see, in one app: Flatland, Phantastes, The Pilgrim’s Progress, The Night Land, The Time Machine and The War of the Worlds, each read aloud word by word. For iPhone, iPad and Android.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cyberfugue.github.io/other-worlds/">
+<meta property="og:title" content="Other Worlds, for iPhone, iPad and Android">
+<meta property="og:description" content="Six classic journeys, each read aloud word by word and set inside its own world.">
+<meta property="og:image" content="https://cyberfugue.github.io/other-worlds/img/share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="800">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cyberfugue.github.io/other-worlds/img/share.jpg">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap">
+<style>
+  /* the shelf's own night and gilt, as in the app: deliberately one theme */
+  :root {
+    --ground: #0b0a0d;
+    --ink: #ece4d0;
+    --dim: #ece4d099;
+    --gilt: #d9b45f;
+    --line: rgba(236, 228, 208, 0.14);
+    --display: "IM Fell English", Georgia, "Times New Roman", serif;
+    --display-sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+    --body: "EB Garamond", Garamond, "Iowan Old Style", Georgia, serif;
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--ground); }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 1.15rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: var(--gilt); text-underline-offset: 3px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* the six windows */
+  .hero { text-align: center; padding: calc(2rem + env(safe-area-inset-top, 0px)) var(--gutter) clamp(2.5rem, 7vh, 4.5rem); background: radial-gradient(120% 70% at 50% 0%, #2a2233 0%, transparent 65%); }
+  .hero img { width: min(100%, 72rem); margin: 0 auto; }
+  .kicker { font-family: var(--display-sc); letter-spacing: .3em; font-size: .82rem; color: var(--dim); text-transform: lowercase; margin: 1.4rem 0 0; }
+  h1 { font-family: var(--display-sc); font-weight: 400; margin: .3rem 0 0; font-size: clamp(3rem, 11vw, 6.2rem); line-height: .95; letter-spacing: .03em; text-shadow: 0 0 40px rgba(217,180,95,.25); }
+  .lede { max-width: 36rem; margin: 1.2rem auto 0; font-size: 1.22rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1.8rem; }
+  .btn { display: inline-block; border: 1px solid rgba(217,180,95,.6); padding: .85em 1.5em; font-family: var(--display-sc); letter-spacing: .14em; font-size: .95rem; text-transform: lowercase; color: var(--ink); text-decoration: none; border-radius: 999px; }
+  .btn.soon { cursor: default; }
+  .note { margin: .9rem 0 0; color: var(--dim); font-size: .98rem; font-style: italic; }
+
+  section { padding: clamp(2.5rem, 8vw, 5rem) var(--gutter); }
+  .wrap { max-width: 68rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.05; margin: 0 0 1rem; }
+  .intro { text-align: center; max-width: 40rem; margin: 0 auto; }
+  .intro p { margin: 0 0 1rem; }
+  .center { text-align: center; }
+
+  /* the shelf of books, each in its own colours */
+  .books { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); }
+  .book { display: flex; flex-direction: column; border-radius: 16px; overflow: hidden; background: var(--b-ground); border: 1px solid color-mix(in srgb, var(--b-accent) 40%, transparent); box-shadow: 0 14px 34px rgba(0,0,0,.5); }
+  .book img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .book div { padding: 1rem 1.2rem 1.2rem; display: flex; flex-direction: column; flex: 1; }
+  .book h3 { font-family: var(--display); font-weight: 400; font-size: 1.55rem; line-height: 1.1; margin: 0; color: var(--b-ink); }
+  .book .by { margin: .2rem 0 .7rem; color: var(--b-ink); opacity: .75; font-size: 1rem; }
+  .book p { margin: 0 0 .8rem; color: var(--b-ink); font-size: 1.05rem; }
+  .book .free { color: var(--b-accent); font-size: 1rem; margin-top: auto; }
+  .book a { color: var(--b-accent); font-size: 1rem; }
+
+  /* each feature beside a phone */
+  .feature { display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: center; max-width: 60rem; margin: 0 auto; padding: clamp(2rem, 6vw, 3.5rem) 0; border-top: 1px solid var(--line); }
+  .feature .num { font-family: var(--display); color: var(--gilt); font-size: 1.1rem; letter-spacing: .1em; }
+  .feature h3 { font-family: var(--display); font-weight: 400; font-size: clamp(1.6rem, 4.5vw, 2.2rem); line-height: 1.1; margin: .2rem 0 .8rem; }
+  .feature p { margin: 0 0 .8rem; }
+  .phone { justify-self: center; width: min(17rem, 72vw); border-radius: 2.2rem; padding: .55rem; background: linear-gradient(145deg, #2a2730, #0d0c11); box-shadow: 0 0 0 1px rgba(236,228,208,.12), 0 30px 60px rgba(0,0,0,.6), 0 0 60px rgba(217,180,95,.12); }
+  .phone img { border-radius: 1.7rem; width: 100%; aspect-ratio: 390 / 844; object-fit: cover; }
+  @media (min-width: 760px) {
+    .feature { grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .feature:nth-of-type(even) .phone { order: -1; }
+  }
+
+  /* free, each book, and all of them */
+  .offer { display: grid; gap: 1rem; grid-template-columns: 1fr; max-width: 64rem; margin: 1.5rem auto 0; }
+  .card { border: 1px solid var(--line); padding: 1.4rem 1.4rem 1.2rem; background: rgba(236,228,208,.03); border-radius: 14px; }
+  .card.all { border-color: rgba(217,180,95,.6); background: radial-gradient(ellipse at 50% 0%, rgba(217,180,95,.14), transparent 70%); }
+  .card h3 { font-family: var(--display-sc); font-weight: 400; letter-spacing: .16em; text-transform: lowercase; font-size: 1.05rem; margin: 0 0 .6rem; color: var(--gilt); }
+  .card ul { margin: 0; padding-left: 1.1rem; }
+  .card li { margin: .2rem 0; }
+  @media (min-width: 820px) { .offer { grid-template-columns: repeat(3, 1fr); } }
+
+  .about { max-width: 40rem; margin: 0 auto; }
+  .about p { margin: 0 0 1rem; }
+  footer { padding: 2.5rem var(--gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); text-align: center; color: var(--dim); font-size: .95rem; }
+  footer nav { display: flex; gap: 1.4rem; justify-content: center; flex-wrap: wrap; margin-bottom: .8rem; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="Six arched windows on a gilt sill under the stars, each looking into one book’s world: a sphere over a plane, a moonlit wood, a pilgrim on the road to a golden city, a pyramid of lights on a dark plain, a sunlit far future, and a Martian fighting-machine against a burning sky" width="1920" height="823">
+  <p class="kicker">Six immersive editions · iPhone, iPad and Android</p>
+  <h1>Other Worlds</h1>
+  <p class="lede">Six journeys beyond the world we see, in one app. Read each book whole, hear it read aloud word by word, and step into the world it describes.</p>
+  <div class="ctas">
+    <!-- when the app is live, make this a link to its App Store page and drop "soon" -->
+    <span class="btn soon">Coming soon to the App Store</span>
+  </div>
+  <p class="note">The first chapter of every book is free. Each whole book is $3.99, or all of them $14.99, once. The Pilgrim’s Progress is free all through.</p>
+</header>
+
+<section>
+  <div class="intro">
+    <h2>A shelf of strange journeys</h2>
+    <p>A Square lifted out of his flat world. A young man waking to find his room become a wood. A pilgrim on the road to the Celestial City. The last of humankind in a pyramid under a dead sun. A traveller in time. Martians on Horsell Common.</p>
+    <p>Each of these six books was made into an edition of its own, with its own world around the text, its own reading voices and its own places to explore. Other Worlds puts them on one shelf.</p>
+  </div>
+
+  <div class="wrap">
+    <ul class="books" role="list">
+      <li class="book" style="--b-ground:#020306;--b-ink:#e8e2cf;--b-accent:#5fd3c0">
+        <img src="img/flatland.jpg" alt="" width="1024" height="576" loading="lazy">
+        <div>
+          <h3>Flatland</h3>
+          <p class="by">Edwin A. Abbott, 1884</p>
+          <p>A Square in a world of two dimensions is visited by a Sphere. Abbott’s figures redrawn in light, and Lineland, Flatland, Spaceland and the fourth dimension around you.</p>
+          <p class="free">§1 free · <a href="../flatland/">More about Flatland</a></p>
+        </div>
+      </li>
+      <li class="book" style="--b-ground:#070a08;--b-ink:#e6dfc8;--b-accent:#d7b25a">
+        <img src="../phantastes/img/hero.jpg" alt="" width="1920" height="823" loading="lazy">
+        <div>
+          <h3>Phantastes</h3>
+          <p class="by">George MacDonald, 1858</p>
+          <p>Anodos goes on into Fairy Land. John Bell’s twenty-five plates of 1894, alive, and the painted wood to wander in.</p>
+          <p class="free">The mottoes and Chapter I free · <a href="../phantastes/">More about Phantastes</a></p>
+        </div>
+      </li>
+      <li class="book" style="--b-ground:#16110c;--b-ink:#efe3c4;--b-accent:#e3c27a">
+        <img src="../pilgrims-progress/img/hero.jpg" alt="" width="1920" height="823" loading="lazy">
+        <div>
+          <h3>The Pilgrim’s Progress</h3>
+          <p class="by">John Bunyan, 1678</p>
+          <p>Christian’s way from the City of Destruction to the Celestial City, stage by stage, with the Way to walk.</p>
+          <p class="free">Free, all of it · <a href="../pilgrims-progress/">More about The Pilgrim’s Progress</a></p>
+        </div>
+      </li>
+      <li class="book" style="--b-ground:#050407;--b-ink:#d9d2c4;--b-accent:#7fa8e0">
+        <img src="../the-night-land/img/hero.jpg" alt="" width="1920" height="823" loading="lazy">
+        <div>
+          <h3>The Night Land</h3>
+          <p class="by">William Hope Hodgson, 1912</p>
+          <p>The last millions keep watch from a pyramid under a dead sun. Look out from the Embrasure on the land painted from the book’s own words.</p>
+          <p class="free">The prologue and Chapter I free · <a href="../the-night-land/">More about The Night Land</a></p>
+        </div>
+      </li>
+      <li class="book" style="--b-ground:#0d0a07;--b-ink:#efe4cc;--b-accent:#d5a64a">
+        <img src="../the-time-machine/img/hero.jpg" alt="" width="1920" height="823" loading="lazy">
+        <div>
+          <h3>The Time Machine</h3>
+          <p class="by">H. G. Wells, 1895</p>
+          <p>The Time Traveller’s voyage to the year 802,701 and beyond, with his dials turning as you read, and the machine to take yourself.</p>
+          <p class="free">Chapter I free · <a href="../the-time-machine/">More about The Time Machine</a></p>
+        </div>
+      </li>
+      <li class="book" style="--b-ground:#1a1714;--b-ink:#e9dfc9;--b-accent:#f0a64a">
+        <img src="../the-war-of-the-worlds/img/hero.jpg" alt="" width="1440" height="900" loading="lazy">
+        <div>
+          <h3>The War of the Worlds</h3>
+          <p class="by">H. G. Wells, 1898</p>
+          <p>The cylinders fall on Horsell Common, and the Martians walk on London. The war drawn live in ink beside the text, and Henrique Alvim Corrêa’s plates of 1906.</p>
+          <p class="free">Chapter I free · <a href="../the-war-of-the-worlds/">More about The War of the Worlds</a></p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <article class="feature">
+      <div>
+        <div class="num">I</div>
+        <h3>Every book, read aloud word by word</h3>
+        <p>Each book is read by LibriVox volunteers, and each word lights as it is spoken, with the page following the voice. Tap any paragraph to hear it from there. Change the speed, set a sleep timer, and play and pause from the lock screen and your headphones.</p>
+        <p>A book’s reading is downloaded the first time you listen to it, and from then on plays without a connection, with the screen locked.</p>
+      </div>
+      <div class="phone"><img src="img/shelf.jpg" alt="The shelf of Other Worlds: Flatland, Phantastes and The Pilgrim’s Progress, each with its cover, what is free and its price" width="780" height="1688" loading="lazy"></div>
+    </article>
+    <article class="feature">
+      <div>
+        <div class="num">II</div>
+        <h3>Buy one book, or all of them</h3>
+        <p>Begin any book free. When you want the rest of it, buy that whole book; or buy all the books at once. Either is a single purchase, with no subscription, that opens on every device signed in to the same account.</p>
+      </div>
+      <div class="phone"><img src="img/offer.jpg" alt="The offer of All the books: every book opened for $14.99, one purchase" width="780" height="1688" loading="lazy"></div>
+    </article>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap center">
+    <h2>Begin free</h2>
+    <p>No subscription, no ads, no account.</p>
+  </div>
+  <div class="offer">
+    <div class="card">
+      <h3>Free</h3>
+      <ul>
+        <li>The first chapter of every book (Flatland’s first section), with its reading, its world and its own places</li>
+        <li>The Pilgrim’s Progress, all of it</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Each whole book · $3.99</h3>
+      <ul>
+        <li>The rest of that book, read and heard</li>
+        <li>Everything its edition does, all through</li>
+        <li>Restore it free on your other devices</li>
+      </ul>
+    </div>
+    <div class="card all">
+      <h3>All the books · $14.99</h3>
+      <ul>
+        <li>Flatland, Phantastes, The Night Land, The Time Machine and The War of the Worlds, whole</li>
+        <li>One purchase, once</li>
+        <li>Restore it free on your other devices</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="about">
+    <h2 class="center">About Other Worlds</h2>
+    <p>The texts, their pictures and the LibriVox readings are in the public domain. The worlds drawn around them, the sound and music, the maps and each edition’s own places are original to these editions; each has its own page, linked above.</p>
+    <p>The app collects no data. It works on iPhone and iPad with iOS 15 or later and on Android 7 or later, and on iPhone Duo each book opens out in its own way as you unfold the phone, keeping your place.</p>
+  </div>
+</section>
+
+<footer>
+  <nav>
+    <a href="support/">Support</a>
+    <a href="privacy/">Privacy</a>
+  </nav>
+  <p>Other Worlds · six immersive editions in one app</p>
+</footer>
+
+</body>
+</html>
