@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Worlds of Oz</title>
+<meta name="description" content="L. Frank Baum’s books of Oz, read aloud word by word with their first pictures, and Oz shown three ways as you read. For iPhone, iPad and Android.">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Goudy+Bookletter+1911&display=swap">
+<style>
+  /* the green and gilt of the Emerald City, as in the app */
+  :root {
+    --ground: #123a24; --card: #1a4a2e; --ink: #fdf6df; --dim: #fdf6dfbb; --gilt: #e3bb4a; --line: rgba(253, 246, 223, 0.18);
+    --gutter: max(16px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--ground); }
+  body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(120% 40% at 50% 0%, #2f8a4c 0%, transparent 60%), var(--ground); font-family: "Sorts Mill Goudy", "Iowan Old Style", Georgia, serif; font-size: 1.15rem; line-height: 1.65; }
+  a { color: var(--gilt); text-underline-offset: 3px; }
+  .kicker { letter-spacing: .2em; font-size: .9rem; color: var(--dim); margin: 0; padding-bottom: .4rem; border-bottom: 1px solid var(--line); text-transform: uppercase; }
+  .kicker a { color: inherit; text-decoration: none; }
+  main { max-width: 40rem; margin: 0 auto; padding: calc(48px + env(safe-area-inset-top, 0px)) var(--gutter) calc(64px + env(safe-area-inset-bottom, 0px)); }
+  h1 { font-family: "Goudy Bookletter 1911", Georgia, serif; font-weight: 400; font-size: clamp(2.2rem, 9vw, 3.2rem); line-height: 1.05; margin: 1rem 0 1.3rem; }
+  h2 { font-family: "Goudy Bookletter 1911", Georgia, serif; font-weight: 400; font-size: 1.55rem; margin: 2.1rem 0 .4rem; color: var(--gilt); }
+  p { margin: 0 0 .9rem; }
+  .box { border: 1px solid rgba(227,187,74,.55); border-radius: 12px; padding: 1rem 1.2rem; margin: 0 0 1rem; background: var(--card); }
+  .box p { margin: 0; }
+  .hint { color: var(--dim); font-size: 1.05rem; }
+  .shots { display: flex; gap: 12px; flex-wrap: wrap; margin: 1.2rem 0; }
+  .shots img { width: calc(50% - 6px); height: auto; border-radius: 14px; border: 2px solid var(--gilt); }
+  .hero { display: flex; gap: 18px; align-items: center; }
+  .hero img { width: 7rem; border-radius: 22px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="kicker">cyberfugue · iPhone, iPad and Android</p>
+  <div class="hero"><img src="icon.png" alt="The Emerald City’s towers at the end of the road of yellow brick"><h1>Worlds of Oz</h1></div>
+  <p>Step through the cyclone into the Land of Oz. L. Frank Baum’s <em>The Wonderful Wizard of Oz</em>, complete, with every one of W. W. Denslow’s pictures of 1900, read aloud by either of two LibriVox readers with each word lit as it is spoken. More of the books of Oz are on the road of yellow brick.</p>
+  <div class="shots"><img src="img/reading.jpg" alt="Chapter I, The Cyclone, read aloud beneath Denslow’s picture of Uncle Henry and Aunt Em"><img src="img/room.jpg" alt="Your room in the Emerald City, with keepsakes on the mantel, the wall and the table"></div>
+  <h2>Three ways to see Oz</h2>
+  <p>Beside the text, Oz is shown the way you choose: <strong>Storybook</strong>, Denslow’s own pictures waking at the words; <strong>Walk into Oz</strong>, Oz in three dimensions, the road of yellow brick under your feet; or <strong>Paper theatre</strong>, a toy theatre whose scenery stands up as the story is read. Come into Oz through the Gates of the Emerald City, over the map of Oz, or from your own room.</p>
+  <h2>Keepsakes for your room</h2>
+  <p>The Silver Shoes, the Tin Woodman’s oil-can, the Golden Cap, the green spectacles: keepsakes sparkle where Baum tells of them, and some are earned by doing (oiling the Woodman, saying the charm of the Cap). Set them out in your room in the Emerald City, outside the books, whose walls take the colours of the countries of Oz, and whose alcoves open one by one for each book. A cabinet waits for the keepsakes of the eleven books to come.</p>
+  <h2>What is free</h2>
+  <p>Chapter I of each book is free. <em>The whole book</em> is one purchase ($3.99 in the US); <em>All the books of Oz</em> ($17.99) opens every book, including every one added later.</p>
+  <p class="hint">Made from Baum’s text and the first editions’ pictures, which are in the public domain. <a href="support/">Support</a> · <a href="privacy/">Privacy</a></p>
+</main>
+</body>
+</html>
