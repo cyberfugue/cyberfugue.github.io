@@ -6,14 +6,10 @@ Each immersive edition has its own folder, holding the app's three pages for the
 
 | Edition | Marketing URL | Support URL | Privacy Policy URL |
 |---|---|---|---|
-| Flatland | https://cyberfugue.github.io/flatland/ | …/flatland/support/ | …/flatland/privacy/ |
-| The Pilgrim's Progress | https://cyberfugue.github.io/pilgrims-progress/ | …/pilgrims-progress/support/ | …/pilgrims-progress/privacy/ |
-| The Night Land | https://cyberfugue.github.io/the-night-land/ | …/the-night-land/support/ | …/the-night-land/privacy/ |
-| The Time Machine | https://cyberfugue.github.io/the-time-machine/ | …/the-time-machine/support/ | …/the-time-machine/privacy/ |
-| Phantastes | https://cyberfugue.github.io/phantastes/ | …/phantastes/support/ | …/phantastes/privacy/ |
-| The War of the Worlds | https://cyberfugue.github.io/the-war-of-the-worlds/ | …/the-war-of-the-worlds/support/ | …/the-war-of-the-worlds/privacy/ |
-| Other Worlds (all six in one app) | https://cyberfugue.github.io/other-worlds/ | …/other-worlds/support/ | …/other-worlds/privacy/ |
+| Other Worlds (seven books in one app) | https://cyberfugue.github.io/other-worlds/ | …/other-worlds/support/ | …/other-worlds/privacy/ |
 | Worlds of Oz (the books of Oz in one app) | https://cyberfugue.github.io/worlds-of-oz/ | …/worlds-of-oz/support/ | …/worlds-of-oz/privacy/ |
 | Aeonfall | https://cyberfugue.github.io/aeonfall/ | …/aeonfall/support/ | …/aeonfall/privacy/ |
+
+The six books Other Worlds bundles no longer have editions of their own here; each one's help page lives under `other-worlds/support/<book>/`.
 
 A new edition adds its folder here, with all three pages, before it goes to App Store review. The edition's own repository keeps no copy (its `CLAUDE.md` says so), and on its Vercel address, where the edition itself plays on the web, `/support/` and `/privacy/` redirect here.
