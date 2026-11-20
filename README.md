@@ -7,7 +7,7 @@ Each immersive edition has its own folder, holding the app's three pages for the
 | Edition | Marketing URL | Support URL | Privacy Policy URL |
 |---|---|---|---|
 | Other Worlds (seven books in one app) | https://cyberfugue.github.io/other-worlds/ | …/other-worlds/support/ | …/other-worlds/privacy/ |
-| Worlds of Oz (the books of Oz in one app) | https://cyberfugue.github.io/worlds-of-oz/ | …/worlds-of-oz/support/ | …/worlds-of-oz/privacy/ |
+| Realms of Oz (the books of Oz in one app) | https://cyberfugue.github.io/worlds-of-oz/ | …/worlds-of-oz/support/ | …/worlds-of-oz/privacy/ |
 | Aeonfall | https://cyberfugue.github.io/aeonfall/ | …/aeonfall/support/ | …/aeonfall/privacy/ |
 
 The six books Other Worlds bundles no longer have editions of their own here; each one's help page lives under `other-worlds/support/<book>/`.
