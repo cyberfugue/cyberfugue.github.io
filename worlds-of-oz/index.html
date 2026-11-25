@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Realms of Oz</title>
-<meta name="description" content="L. Frank Baum’s books of Oz, read aloud word by word with their first pictures, and Oz shown three ways as you read. For iPhone, iPad and Android.">
+<meta name="description" content="All fourteen of L. Frank Baum’s books of Oz, read aloud word by word with their first pictures, Oz shown three ways as you read, and Stories of Oz, an adventure across every book. For iPhone, iPad and Android.">
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,8 +29,15 @@
   .box { border: 1px solid rgba(227,187,74,.55); border-radius: 12px; padding: 1rem 1.2rem; margin: 0 0 1rem; background: var(--card); }
   .box p { margin: 0; }
   .hint { color: var(--dim); font-size: 1.05rem; }
-  .shots { display: flex; gap: 12px; flex-wrap: wrap; margin: 1.2rem 0; }
-  .shots img { width: calc(50% - 6px); height: auto; border-radius: 14px; border: 2px solid var(--gilt); }
+  /* screenshots: a row that scrolls sideways on a narrow screen, each with its caption */
+  .shots { display: flex; gap: 14px; margin: 1.2rem calc(-1 * var(--gutter)); padding: 0 var(--gutter) .6rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--gilt) transparent; }
+  .shots figure { flex: 0 0 auto; width: min(13rem, 62vw); margin: 0; scroll-snap-align: start; }
+  .shots img { display: block; width: 100%; height: auto; aspect-ratio: 600 / 1304; border-radius: 14px; border: 2px solid var(--gilt); background: var(--card); }
+  .shots figcaption { font-size: .92rem; line-height: 1.35; color: var(--dim); margin-top: .45rem; }
+  @media (min-width: 46rem) { .shots { flex-wrap: wrap; overflow: visible; margin-left: 0; margin-right: 0; padding: 0; } .shots figure { width: calc((100% - 28px) / 3); } .shots.four figure { width: calc((100% - 42px) / 4); } }
+  ul.facts { margin: 0 0 1rem; padding-left: 1.2rem; }
+  ul.facts li { margin: 0 0 .45rem; }
+  ul.facts li::marker { color: var(--gilt); }
   .hero { display: flex; gap: 18px; align-items: center; }
   .hero img { width: 7rem; border-radius: 22px; }
 </style>
@@ -40,13 +47,49 @@
   <p class="kicker">cyberfugue · iPhone, iPad and Android</p>
   <div class="hero"><img src="icon.png" alt="The Emerald City at the end of the road of yellow brick, in a gilt frame"><h1>Realms of Oz</h1></div>
   <p>Step through the cyclone into the Land of Oz. L. Frank Baum’s <em>The Wonderful Wizard of Oz</em>, with every one of W. W. Denslow’s pictures of 1900, <em>The Marvelous Land of Oz</em>, with every one of John R. Neill’s pictures of 1904, <em>Ozma of Oz</em>, <em>Dorothy and the Wizard in Oz</em>, <em>The Road to Oz</em>, <em>The Emerald City of Oz</em>, <em>The Patchwork Girl of Oz</em>, <em>Tik-Tok of Oz</em>, <em>The Scarecrow of Oz</em>, <em>Rinkitink in Oz</em>, <em>The Lost Princess of Oz</em>, <em>The Tin Woodman of Oz</em>, <em>The Magic of Oz</em> and <em>Glinda of Oz</em>, with every one of Neill’s pictures of 1907 to 1920: all fourteen of Baum’s books of Oz, each complete and read aloud by either of two LibriVox readers with each word lit as it is spoken.</p>
-  <div class="shots"><img src="img/reading.jpg" alt="Chapter I, The Cyclone, read aloud beneath Denslow’s picture of Uncle Henry and Aunt Em"><img src="img/room.jpg" alt="Your room in the Emerald City, with keepsakes on the mantel, the wall and the table"></div>
+  <div class="shots">
+    <figure><img src="img/library.jpg" width="600" height="1304" loading="lazy" alt="The library’s home: the painted Land of Oz with every book a pin in its country, and the rail of Explore Oz, The Books, Collections, Keepsakes, The Author, Travel Log, Play and Map"><figcaption>The library opens on the painted Land of Oz, every book a pin in its own country.</figcaption></figure>
+    <figure><img src="img/map.jpg" width="600" height="1304" loading="lazy" alt="The map of Oz with The Wonderful Wizard of Oz brought forward on its card, with Go on reading"><figcaption>Tap a pin to bring its book forward.</figcaption></figure>
+  </div>
   <h2>Three ways to see Oz</h2>
-  <p>Beside the text, Oz is shown the way you choose: <strong>Storybook</strong>, the first edition’s own pictures waking at the words; <strong>Walk into Oz</strong>, Oz in three dimensions, the road of yellow brick under your feet; or <strong>Paper theatre</strong>, a toy theatre whose scenery stands up as the story is read. Come into Oz through the Gates of the Emerald City, over the map of Oz, or from your own room.</p>
+  <p>Beside the text, Oz is shown the way you choose, and follows the reading paragraph by paragraph: <strong>Storybook</strong>, the first edition’s own pictures waking at the words; <strong>Walk into Oz</strong>, Oz in three dimensions, the road of yellow brick under your feet and the company walking ahead; or <strong>Paper theatre</strong>, a toy theatre whose scenery pans and whose players step forward as they speak. Tap anyone in Oz to hear one of their own lines; ride the Gump, the Saw-Horse and the Cowardly Lion, call the Winged Monkeys with the Golden Cap, and say the Magic Word.</p>
+  <div class="shots">
+    <figure><img src="img/theatre.jpg" width="600" height="1304" loading="lazy" alt="The paper theatre: Dorothy and the Scarecrow on his pole before the cornfield, between red curtains, above the text of Chapter III"><figcaption>Paper theatre: the cornfield, and the Scarecrow on his pole.</figcaption></figure>
+    <figure><img src="img/walk.jpg" width="600" height="1304" loading="lazy" alt="Walk into Oz: Dorothy, Toto, the Scarecrow, the Tin Woodman and the Lion on the road of yellow brick to the green wall of the Emerald City"><figcaption>Walk into Oz: the road of yellow brick to the Emerald City.</figcaption></figure>
+    <figure><img src="img/storybook.jpg" width="600" height="1304" loading="lazy" alt="Storybook: Denslow’s picture of Dorothy’s house on the Kansas prairie above the first page"><figcaption>Storybook: the first edition’s own pictures.</figcaption></figure>
+  </div>
   <h2>Keepsakes for your room</h2>
-  <p>The Silver Shoes, the Tin Woodman’s oil-can, the Golden Cap, Jack Pumpkinhead’s head, the pepper-box of the Powder of Life, Billina’s egg, the Nome King’s magic belt, the Wizard’s lantern, the shaggy man’s Love Magnet, a Whimsie’s pasteboard head, a square of the Patchwork Girl’s quilt, the dragon Quox’s golden locket, Cap’n Bill’s spare wooden leg, the Pink Pearl of Pingaree, Cayke the Cookie Cook’s diamond-studded dishpan, the Witch’s bottle of Magic Glue, the Magic Flower in its golden pot, a Flathead’s can of brains, Ervic’s copper kettle: keepsakes sparkle where Baum tells of them, and some are earned by doing (oiling the Woodman, saying the charm of the Cap, counting seventeen by twos with a wishing pill, winding up Tiktok, throwing Billina’s egg at the Nome King, counting the Wizard’s nine tiny piglets, catching the Scoodlers’ heads, staring down the Lion with Aunt Em, plucking the six-leaved clover, winding up Tik-Tok, bringing the Scarecrow across the spider’s bridge, pulling King Rinkitink out of the well, prying open the golden peach-pit, oiling the rusted Tin Soldier, cutting Ozma’s birthday cake). Set them out in your room in the Emerald City, outside the books, whose walls take the colours of the countries of Oz, and whose alcoves open one by one for each book. A cabinet keeps all forty-five keepsakes of the fourteen books.</p>
+  <p>Forty-five keepsakes sparkle where Baum tells of them: the Silver Shoes, the Tin Woodman’s oil-can, the Golden Cap, Jack Pumpkinhead’s head, the pepper-box of the Powder of Life, Billina’s egg, the Nome King’s magic belt, the shaggy man’s Love Magnet, the six-leaved clover, the dragon Quox’s golden locket, the Pink Pearl of Pingaree, Cayke the Cookie Cook’s diamond-studded dishpan, the Magic Flower in its golden pot, a Flathead’s can of brains and more. Some are earned by doing: oiling the Woodman, saying the charm of the Cap, counting seventeen by twos with a wishing pill, throwing Billina’s egg at the Nome King, winding up Tik-Tok, pulling King Rinkitink out of the well, cutting Ozma’s birthday cake.</p>
+  <p>Set them out in your own room in the Emerald City, outside the books: on the mantel of the emerald fireplace, the sill of the window onto the City, the carved table and the gilt cabinet, with an alcove for each book that opens when you find its first keepsake.</p>
+  <h2>The Wizard’s workshop and Who’s Who in Oz</h2>
+  <p>Beside your room is the Wizard’s workshop, where the magic things you have found can be tried on whatever stands on the bench: the Powder of Life on the saw-horse or the sofa, the oil-can on the Tin Woodman, an egg on a Nome. What happens is what Baum says happens, in his own words, and every experiment is written in the Wizard’s notebook.</p>
+  <p><strong>Who’s Who in Oz</strong> is an encyclopedia of the people of Oz and a bestiary of its creatures, a hundred and fourteen of them, from Dorothy and the Scarecrow to the Woozy, the Scoodlers and the Su-dic of the Flatheads: each with a portrait, a biography, friends and enemies, how much they are in each of the fourteen books, and what becomes of them book by book. What happens in a book you haven’t begun stays covered until you choose to see it.</p>
+  <div class="shots">
+    <figure><img src="img/room.jpg" width="600" height="1304" loading="lazy" alt="Your room in the Emerald City: the bookcase, the window onto the City, the emerald fireplace with keepsakes on its mantel, and the satchel of keepsakes beneath"><figcaption>Your room in the Emerald City, with the keepsakes found.</figcaption></figure>
+    <figure><img src="img/workshop.jpg" width="600" height="1304" loading="lazy" alt="The Wizard’s workshop: the oil-can tried on the Tin Woodman, with Baum’s words “Get an oil-can and oil my joints”"><figcaption>The oil-can tried on the Tin Woodman in the workshop.</figcaption></figure>
+    <figure><img src="img/whos-who.jpg" width="600" height="1304" loading="lazy" alt="Who’s Who in Oz open at the Tin Woodman: his portrait, first appearance, his chapters across the books and his biography"><figcaption>Who’s Who in Oz: the Tin Woodman across the books.</figcaption></figure>
+  </div>
+  <h2>Stories of Oz, a game across all fourteen books</h2>
+  <p>Stories of Oz is an adventure through every one of Baum’s books of Oz, in fourteen acts, one for each book: from the cyclone over the gray Kansas prairie and the road of yellow brick, through Tip’s flight on the Gump, the Nome King’s ornaments, the glass city of the Mangaboos, Ozma’s birthday party, Ojo’s search for the magic cure, the Metal Forest, Jinxland, the three pearls of Pingaree, the hunt for the lost Princess and the Magic Word, to the sunken island of the Skeezers. Hand-drawn pixel art, seen from above at a slant, with day and night and the weather.</p>
+  <div class="shots four">
+    <figure><img src="img/game-gate.jpg" width="600" height="1304" loading="lazy" alt="Stories of Oz: Dorothy, Toto, the Scarecrow, the Tin Woodman and the Cowardly Lion on the road of yellow brick at the Emerald City’s gate"><figcaption>The company at the gate of the Emerald City.</figcaption></figure>
+    <figure><img src="img/game-head.jpg" width="600" height="1304" loading="lazy" alt="Stories of Oz: the great Head in the Throne Room, saying “I am Oz, the Great and Terrible. Who are you, and why do you seek me?”"><figcaption>Before the great Head of Oz.</figcaption></figure>
+    <figure><img src="img/game-poppies.jpg" width="600" height="1304" loading="lazy" alt="Stories of Oz: the story card of the Deadly Poppy Field, in Baum’s own words, with Go on, Listen and Read this in the book"><figcaption>The poppy field, in Baum’s own words, with Listen and Read this in the book.</figcaption></figure>
+    <figure><img src="img/game-doll.jpg" width="600" height="1304" loading="lazy" alt="Stories of Oz: Dorothy’s paper doll, with her company beside her and a place for everything she can wear"><figcaption>Dress the company from the shops of the Emerald City.</figcaption></figure>
+  </div>
+  <ul class="facts">
+    <li><strong>Two ways to play.</strong> In <em>The Tellings</em> you are each book’s own hero: Dorothy, then Tip, Ojo, Betsy, Trot, Prince Inga, Woot and the rest. In <em>The Traveller</em> you are a child of your own from the next farm in Kansas, carried off by the same cyclone, who walks beside every story.</li>
+    <li><strong>Oz as Baum tells it.</strong> Talk with everyone you meet by tapping what you would say; the story’s great moments (the poppy field, the Fighting Trees, the Scoodlers, the Gargoyles) are told on a card in Baum’s own paragraphs. Foes are routed, never slain.</li>
+    <li><strong>Never lost.</strong> <em>What now?</em> always says the next step of the story, a gold ✦ floats over whoever has something new to say, an arrow at the screen’s edge points the way, and the map shows the land as you have walked it, with the next step as a gold star.</li>
+    <li><strong>A Land of Oz that changes from book to book.</strong> The Emerald City’s shops sell their green things for the Guardian’s green pennies in the first act and give freely after; the Palace of Oz is the Wizard’s, then the Scarecrow’s, then General Jinjur’s, then Ozma’s, on four floors and a treasury; the Tin Woodman’s tin castle, Jack Pumpkinhead’s pumpkin house and the Scarecrow’s corn-ear mansion stand from their own books, and friends come to live in Oz as Baum has them.</li>
+    <li><strong>The game and the books together.</strong> Every story card has <em>Read this in the book</em>, which opens the book at the chapter it tells, and <em>Listen</em> where it is Baum’s own words, read in the book’s own recording with each word lit. A book the game has reached offers <em>Play this in Stories of Oz</em>. A keepsake found in the game is the same keepsake as in the book, and waits in your room.</li>
+    <li><strong>Play an act again,</strong> any act you have reached, and come back to where you left off. Three saved games of your own; on iPhone and iPad they are kept in your iCloud too, so another iPhone or iPad carries on.</li>
+    <li><strong>When the last act is done, Oz stays open:</strong> everyone from every book at home, and the Magic Belt to wish you anywhere in Oz, or to make you any of the heroes.</li>
+  </ul>
+  <h2>On iPhone Duo</h2>
+  <p>Open the phone and the book opens as a storybook, Oz spread over the whole page and settling at the same word; in Stories of Oz the inner display becomes Ozma’s Magic Picture, its gilt frame flaring round a wider view of Oz.</p>
   <h2>What is free</h2>
-  <p>Chapter I of each book is free. <em>The whole book</em> is one purchase ($1.99 in the US); <em>All the books of Oz</em> ($19.99) opens every book, all of Stories of Oz and everything else in the app, including every book added later.</p>
+  <p>Chapter I of each book is free, and in Stories of Oz Kansas, the cyclone and the Munchkins’ meadow. <em>The whole book</em> is one purchase ($1.99 in the US), and opens that book’s act of the game too; <em>All the books of Oz</em> ($19.99) opens every book, all of Stories of Oz and everything else in the app, including every book added later. Nothing is collected about you.</p>
   <p class="hint">Made from Baum’s text and the first editions’ pictures, which are in the public domain. <a href="support/">Support</a> · <a href="privacy/">Privacy</a></p>
 </main>
 </body>
