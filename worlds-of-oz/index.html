@@ -35,6 +35,19 @@
   .shots img { display: block; width: 100%; height: auto; aspect-ratio: 600 / 1304; border-radius: 14px; border: 2px solid var(--gilt); background: var(--card); }
   .shots figcaption { font-size: .92rem; line-height: 1.35; color: var(--dim); margin-top: .45rem; }
   @media (min-width: 46rem) { .shots { flex-wrap: wrap; overflow: visible; margin-left: 0; margin-right: 0; padding: 0; } .shots figure { width: calc((100% - 28px) / 3); } .shots.four figure { width: calc((100% - 42px) / 4); } }
+  /* the trailers: on its side on a wide screen, upright in a row that scrolls sideways on a phone */
+  .trailers { margin: 1.2rem 0 .4rem; }
+  .trailers figure { margin: 0 0 1.1rem; }
+  .trailers video { display: block; width: 100%; height: auto; border-radius: 12px; border: 2px solid var(--gilt); background: #000; }
+  .trailers figcaption { font-size: .92rem; line-height: 1.35; color: var(--dim); margin-top: .45rem; }
+  .trailers figcaption strong { color: var(--ink); font-weight: 400; font-family: "Goudy Bookletter 1911", Georgia, serif; font-size: 1.05rem; }
+  .trailers .tall { display: none; }
+  @media (max-width: 45.99rem) {
+    .trailers { display: flex; gap: 14px; margin: 1.2rem calc(-1 * var(--gutter)); padding: 0 var(--gutter) .6rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--gilt) transparent; }
+    .trailers figure { flex: 0 0 auto; width: min(15rem, 68vw); margin: 0; scroll-snap-align: start; }
+    .trailers .wide { display: none; }
+    .trailers .tall { display: block; aspect-ratio: 590 / 1280; }
+  }
   ul.facts { margin: 0 0 1rem; padding-left: 1.2rem; }
   ul.facts li { margin: 0 0 .45rem; }
   ul.facts li::marker { color: var(--gilt); }
@@ -50,6 +63,25 @@
   <div class="shots">
     <figure><img src="img/library.jpg" width="600" height="1304" loading="lazy" alt="The library’s home: the painted Land of Oz with every book a pin in its country, and the rail of Explore Oz, The Books, Collections, Keepsakes, The Author, Travel Log, Play and Map"><figcaption>The library opens on the painted Land of Oz, every book a pin in its own country.</figcaption></figure>
     <figure><img src="img/map.jpg" width="600" height="1304" loading="lazy" alt="The map of Oz with The Wonderful Wizard of Oz brought forward on its card, with Go on reading"><figcaption>Tap a pin to bring its book forward.</figcaption></figure>
+  </div>
+  <h2>The trailers</h2>
+  <p>Three short films of the app, in Baum’s own words.</p>
+  <div class="trailers">
+    <figure>
+      <video class="wide" controls playsinline preload="none" poster="video/the-road-wide.jpg" width="1280" height="590" aria-label="Trailer: Every road in Oz. Down over the map of Oz, along the road of yellow brick, through the four countries in their colours to the Emerald City, then the fourteen books and the three ways of seeing Oz."><source src="video/the-road-wide.mp4" type="video/mp4"></video>
+      <video class="tall" controls playsinline preload="none" poster="video/the-road-tall.jpg" width="590" height="1280" aria-label="Trailer: Every road in Oz. Down over the map of Oz, along the road of yellow brick, through the four countries in their colours to the Emerald City, then the fourteen books and the three ways of seeing Oz."><source src="video/the-road-tall.mp4" type="video/mp4"></video>
+      <figcaption><strong>Every road in Oz.</strong> Down over the Land of Oz, along the road of yellow brick, through the four countries in their four colours to the Emerald City.</figcaption>
+    </figure>
+    <figure>
+      <video class="wide" controls playsinline preload="none" poster="video/the-powder-wide.jpg" width="1280" height="590" aria-label="Trailer: The Powder of Life. Mombi sprinkles the powder, her three words wake Jack Pumpkinhead, the Saw-Horse and the Gump, and the saw-horse comes alive in the Wizard’s workshop."><source src="video/the-powder-wide.mp4" type="video/mp4"></video>
+      <video class="tall" controls playsinline preload="none" poster="video/the-powder-tall.jpg" width="590" height="1280" aria-label="Trailer: The Powder of Life. Mombi sprinkles the powder, her three words wake Jack Pumpkinhead, the Saw-Horse and the Gump, and the saw-horse comes alive in the Wizard’s workshop."><source src="video/the-powder-tall.mp4" type="video/mp4"></video>
+      <figcaption><strong>The Powder of Life.</strong> Mombi’s three words, the things the powder wakes, and the saw-horse brought to life in the Wizard’s workshop.</figcaption>
+    </figure>
+    <figure>
+      <video class="wide" controls playsinline preload="none" poster="video/the-picture-wide.jpg" width="1280" height="590" aria-label="Trailer: The Magic Picture. Ozma’s picture in its gold frame shows, wish by wish, the book read aloud, the walk, the paper theatre, your room, Who’s Who and Stories of Oz."><source src="video/the-picture-wide.mp4" type="video/mp4"></video>
+      <video class="tall" controls playsinline preload="none" poster="video/the-picture-tall.jpg" width="590" height="1280" aria-label="Trailer: The Magic Picture. Ozma’s picture in its gold frame shows, wish by wish, the book read aloud, the walk, the paper theatre, your room, Who’s Who and Stories of Oz."><source src="video/the-picture-tall.mp4" type="video/mp4"></video>
+      <figcaption><strong>The Magic Picture.</strong> Ozma’s picture in its gold frame shows, wish by wish, everything the app does.</figcaption>
+    </figure>
   </div>
   <h2>Three ways to see Oz</h2>
   <p>Beside the text, Oz is shown the way you choose, and follows the reading paragraph by paragraph: <strong>Storybook</strong>, the first edition’s own pictures waking at the words; <strong>Walk into Oz</strong>, Oz in three dimensions, the road of yellow brick under your feet and the company walking ahead; or <strong>Paper theatre</strong>, a toy theatre whose scenery pans and whose players step forward as they speak. Tap anyone in Oz to hear one of their own lines; ride the Gump, the Saw-Horse and the Cowardly Lion, call the Winged Monkeys with the Golden Cap, and say the Magic Word.</p>
